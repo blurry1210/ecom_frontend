@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../Cart/CartContext';
 import { useNotification } from '../../components/notifications/NotificationContext';
 import axios from 'axios';
-import './CheckoutForm.less';
+import Navbar from '../../components/navbar/Navbar';
+import TopBar from '../../components/TopBar/TopBar';
+import './CheckoutForm.css';
 
 const CheckoutForm = () => {
   const { cartItems, clearCart } = useCart();
@@ -72,7 +74,6 @@ const CheckoutForm = () => {
       showNotification('Order placed successfully!', 'success');
 
       if (formData.paymentMethod === 'Card') {
-        
         navigate('/payment', { state: { amount: totalPrice } });
       } else {
         setTimeout(() => {
@@ -86,36 +87,40 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div className="checkout-form-container">
-      <form className="checkout-form" onSubmit={handleSubmit}>
-        <h2>Checkout</h2>
-        <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />
-        <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
-        <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" required />
-        <input name="addressLine" value={formData.addressLine} onChange={handleChange} placeholder="Address" required />
-        <input name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
-        <input name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="Postal Code" required />
-        <input name="country" value={formData.country} onChange={handleChange} placeholder="Country" required />
+    <div>
+      <TopBar />
+      <div className="container-checkout-form">
+        <Navbar />
+        <form className="checkout-form" onSubmit={handleSubmit}>
+          <h2>Checkout</h2>
+          <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />
+          <input name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last Name" required />
+          <input name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} placeholder="Phone Number" required />
+          <input name="addressLine" value={formData.addressLine} onChange={handleChange} placeholder="Address" required />
+          <input name="city" value={formData.city} onChange={handleChange} placeholder="City" required />
+          <input name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="Postal Code" required />
+          <input name="country" value={formData.country} onChange={handleChange} placeholder="Country" required />
 
-        <div className="payment-method">
-          <button
-            type="button"
-            className={formData.paymentMethod === 'Cash' ? 'selected' : ''}
-            onClick={() => handlePaymentMethodChange('Cash')}
-          >
-            Cash
-          </button>
-          <button
-            type="button"
-            className={formData.paymentMethod === 'Card' ? 'selected' : ''}
-            onClick={() => handlePaymentMethodChange('Card')}
-          >
-            Card
-          </button>
-        </div>
+          <div className="payment-method">
+            <button
+              type="button"
+              className={formData.paymentMethod === 'Cash' ? 'selected' : ''}
+              onClick={() => handlePaymentMethodChange('Cash')}
+            >
+              Cash
+            </button>
+            <button
+              type="button"
+              className={formData.paymentMethod === 'Card' ? 'selected' : ''}
+              onClick={() => handlePaymentMethodChange('Card')}
+            >
+              Card
+            </button>
+          </div>
 
-        <button type="submit">Place Order</button>
-      </form>
+          <button type="submit">Place Order</button>
+        </form>
+      </div>
     </div>
   );
 };

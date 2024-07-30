@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./home.less";
+import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Button from "../../components/button/Button";
 import { useAuth } from "../login/AuthContext";
@@ -43,13 +43,17 @@ const Home = () => {
   return (
     <div className="home">
       <TopBar setProducts={setProducts} />
-      <div className="navigation-container">
-        <Navbar onCategorySelect={handleCategorySelect} />
-        <FilterComponent setProducts={setProducts} />
+      <Navbar />
+      <div className="content-container">
+        <div className="navigation-container">
+          <FilterComponent setProducts={setProducts} />
+        </div>
+        <ErrorBoundary>
+          <div className="display-products-container">
+            <DisplayProducts products={products} setProducts={setProducts} />
+          </div>
+        </ErrorBoundary>
       </div>
-      <ErrorBoundary>
-        <DisplayProducts products={products} setProducts={setProducts} />
-      </ErrorBoundary>
     </div>
   );
 };

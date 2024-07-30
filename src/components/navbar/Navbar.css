@@ -1,0 +1,46 @@
+.navbar-custom {
+  margin-top: 56px; /* Adjust this value based on the height of the TopBar */
+}
+
+.navbar-custom .dropdown-menu {
+  z-index: 9998 !important; /* Ensure dropdown is above other elements */
+  background-color: #343a40;
+  border: none;
+}
+
+.navbar-custom .dropdown-item {
+  color: #fff;
+}
+
+.navbar-custom .dropdown-item:hover {
+  background-color: #495057;
+}
+
+.navbar-custom .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 991px) {
+  .navbar-custom {
+    margin-top: 20px !important;
+  }
+
+  .navbar-custom .navbar-nav {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .navbar-custom .nav-item {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-item .dropdown-menu {
+    width: 100%;
+  }
+
+  .navbar-custom .nav-item .nav-link {
+    width: 100%;
+    text-align: center;
+  }
+}

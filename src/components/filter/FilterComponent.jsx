@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
-import "./FilterComponent.less";
+import "./FilterComponent.css";
 
 const categories = {
   "Laptop, Tablete, Telefoane": [
@@ -102,7 +102,6 @@ const categories = {
     "Vehicule electrice",
   ],
 };
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
@@ -163,6 +162,7 @@ const FilterComponent = ({ setProducts }) => {
 
   return (
     <div className="filter-component">
+      <h2>Filter By</h2>
       <select
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}

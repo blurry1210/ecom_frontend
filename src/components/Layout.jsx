@@ -1,17 +1,12 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import Navbar from "./navbar/Navbar";
-import Button from "./button/Button";
+import { useLocation } from "react-router-dom";
+import Header from "./Header/Header";
 import { useAuth } from "../pages/login/AuthContext";
-import SearchBar from "./SearchBar/SearchBar";
+import "./Layout.css";
 
 const Layout = ({ children }) => {
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const location = useLocation();
-
-  const handleLogout = () => {
-    setAuth({ isLoggedIn: false, user: null });
-  };
 
   const isProfileOrFavoritesPage =
     location.pathname.startsWith("/profile") ||
@@ -35,34 +30,7 @@ const Layout = ({ children }) => {
 
   return (
     <div style={layoutStyles}>
-      <div className="top-bar">
-        <div className="left-button-group">
-          <Link to="/products" className="header-button-link">
-            <Button className="header-button">Products</Button>
-          </Link>
-        </div>
-        <SearchBar />
-        <div className="button-group">
-          {auth.isLoggedIn && auth.user?.id ? (
-            <div className="dropdown">
-              <Button className="header-button">My Account</Button>
-              <div className="dropdown-content">
-                <Link to={`/profile/${auth.user.id}`}>View Profile</Link>
-                <Link to="/" onClick={handleLogout}>
-                  Logout
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <Link to="/login" className="header-button-link">
-              <Button className="header-button">Login</Button>
-            </Link>
-          )}
-        </div>
-      </div>
-      {!isDistributorProfilePage &&
-        !isProfileOrFavoritesPage &&
-        !isCartPage && <Navbar />}
+      <Header /> {/* Using Header component */}
       {children}
     </div>
   );

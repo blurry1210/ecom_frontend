@@ -28,6 +28,9 @@ import PaymentPage from './pages/Payment/PaymentPage';
 import RoleBasedProfile from './pages/profile/RoleBasedProfile';
 import Admin from "./pages/admin/Admin";
 import ForgotPassword from "./pages/login/ForgotPassword";
+import TopBar from './components/TopBar/TopBar';
+import Navbar from './components/navbar/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../login/AuthContext";
-import "./AddProduct.less";
+import TopBar from "../../components/TopBar/TopBar"; // Include TopBar
+import Navbar from "../../components/navbar/Navbar"; // Include Navbar
+import "./AddProduct.css";
 
 const categories = {
   "Laptop, Tablete, Telefoane": [
@@ -73,35 +75,6 @@ const categories = {
     "Muzica",
     "Consumabile si accesorii birou",
   ],
-  "Jucarii, Articole copii & bebelusi": [
-    "Jucarii",
-    "Scutece si servetele",
-    "Igiena si ingrijire",
-    "Hrana si accesorii",
-  ],
-  "Ingrijire Personala, Cosmetice": ["Ingrijire personala", "Cosmetice"],
-  "Casa, Gradina, Bricolaj": [
-    "Gradinarit",
-    "Mobilier",
-    "Saltele",
-    "Sisteme de iluminat",
-    "Scule",
-    "Materiale de constructii",
-  ],
-  "Sport & Calatorie": [
-    "Camping",
-    "Accesorii sportive",
-    "Ciclism",
-    "Imbracaminte si incaltaminte sport",
-    "Fitness si nutritie",
-  ],
-  "Auto-Moto": [
-    "Anvelope si jante",
-    "Intretinere",
-    "Electronice auto",
-    "Accesorii auto",
-    "Vehicule electrice",
-  ],
 };
 
 function AddProduct() {
@@ -165,107 +138,117 @@ function AddProduct() {
   };
 
   return (
-    <div className="add-product-form">
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name" className="nume">
-          Product Name
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name"
-          value={formData.name}
-          onChange={handleInputChange}
-          required
-        />
+    <div>
+      <TopBar />
+      <Navbar />
+      <div className="add-product-form">
+        <form onSubmit={handleSubmit}>
+          <div className="form-column">
+            <label htmlFor="name" className="nume">
+              Product Name
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              required
+            />
 
-        <label htmlFor="description" className="nume">
-          Product Description
-        </label>
-        <textarea
-          name="description"
-          id="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          required
-        />
+            <label htmlFor="description" className="nume">
+              Product Description
+            </label>
+            <textarea
+              name="description"
+              id="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+            />
 
-        <label htmlFor="price" className="nume">
-          Price
-        </label>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          value={formData.price}
-          onChange={handleInputChange}
-          required
-        />
+            <label htmlFor="price" className="nume">
+              Price
+            </label>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              value={formData.price}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
 
-        <label htmlFor="quantity" className="nume">
-          Quantity
-        </label>
-        <input
-          type="number"
-          name="quantity"
-          id="quantity"
-          value={formData.quantity}
-          onChange={handleInputChange}
-          required
-        />
+          <div className="form-column">
+            <label htmlFor="quantity" className="nume">
+              Quantity
+            </label>
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              value={formData.quantity}
+              onChange={handleInputChange}
+              required
+            />
 
-        <label htmlFor="category" className="nume">
-          Category
-        </label>
-        <select
-          name="category"
-          id="category"
-          value={formData.category}
-          onChange={handleInputChange}
-          required
-        >
-          <option value="" className="nume">
-            Select Category
-          </option>
-          {Object.keys(categories).map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-
-        <label htmlFor="subcategory" className="nume">
-          Subcategory
-        </label>
-        <select
-          name="subcategory"
-          id="subcategory"
-          value={formData.subcategory}
-          onChange={handleInputChange}
-          required
-          disabled={!formData.category}
-        >
-          <option value="">Select Subcategory</option>
-          {formData.category &&
-            categories[formData.category].map((sub) => (
-              <option key={sub} value={sub}>
-                {sub}
+            <label htmlFor="category" className="nume">
+              Category
+            </label>
+            <select
+              name="category"
+              id="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="" className="nume">
+                Select Category
               </option>
-            ))}
-        </select>
+              {Object.keys(categories).map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
 
-        <label htmlFor="images" className="nume">
-          Product Images
-        </label>
-        <input
-          type="file"
-          multiple
-          onChange={handleImageChange}
-          accept="image/*"
-        />
+            <label htmlFor="subcategory" className="nume">
+              Subcategory
+            </label>
+            <select
+              name="subcategory"
+              id="subcategory"
+              value={formData.subcategory}
+              onChange={handleInputChange}
+              required
+              disabled={!formData.category}
+            >
+              <option value="">Select Subcategory</option>
+              {formData.category &&
+                categories[formData.category].map((sub) => (
+                  <option key={sub} value={sub}>
+                    {sub}
+                  </option>
+                ))}
+            </select>
+          </div>
 
-        <button type="submit">Add Product</button>
-      </form>
+          <div className="form-column-full">
+            <label htmlFor="images" className="nume">
+              Product Images
+            </label>
+            <input
+              type="file"
+              multiple
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+
+            <button type="submit">Add Product</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

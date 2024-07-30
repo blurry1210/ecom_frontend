@@ -1,0 +1,113 @@
+:root {
+  --gap: 15px;
+  --white: #fbfbfb;
+  --black: #333333;
+  --color1: #fda085;
+  --color2: #bff098;
+  --color3: #ea8d8d;
+  --color4: #d8b5ff;
+  --color5: #c6ea8d;
+  --color6: #ff758c;
+  --color7: #868f96;
+  --color8: #c79081;
+  --color9: #8baaaa;
+  --color10: #60b347;
+  --color11: #4ca1af;
+}
+
+body {
+  background-color: #333333;
+}
+
+.add-product-form {
+  margin-top: 100px !important;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+.add-product-form form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.form-column {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-column-full {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-product-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+.add-product-form input,
+.add-product-form select,
+.add-product-form textarea,
+.add-product-form button {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  display: inline-block;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #000;
+}
+
+.add-product-form textarea {
+  resize: vertical;
+}
+
+.add-product-form button {
+  background-color: #4caf50;
+  color: #000;
+  cursor: pointer;
+  border: none;
+}
+
+.add-product-form button:hover {
+  background-color: #45a049;
+}
+
+.add-product-form select option {
+  color: #000;
+}
+
+.nume {
+  color: black;
+}
+
+/* Ensuring the dropdown menu is on top */
+.nav-item .dropdown-menu {
+  z-index: 9999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar {
+    background-color: transparent;
+  }
+
+  .navbar-collapse {
+    display: none !important;
+  }
+
+  .form-column {
+    width: 100%;
+  }
+}

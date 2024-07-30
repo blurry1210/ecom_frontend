@@ -2,7 +2,6 @@ import React from "react";
 import { useCart } from "../Cart/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Cart.less";
-import Navbar from "../../components/navbar/Navbar";
 
 function CartPage() {
   const { cartItems, removeFromCart } = useCart();
@@ -25,7 +24,6 @@ function CartPage() {
   if (!cartItems || cartItems.length === 0) {
     return (
       <div className="cart-container" style={pageStyles}>
-        <Navbar />
         <p className="empty-cart-message">Your cart is empty.</p>
         <div className="cart-footer">
           <button onClick={() => navigate(-1)} className="back-button">
@@ -38,7 +36,6 @@ function CartPage() {
 
   return (
     <div className="cart-container" style={pageStyles}>
-      <Navbar />
       <h2 className="cart-text">Your Shopping Cart</h2>
       {cartItems.map(({ product, quantity }) => (
         <div key={product._id} className="cart-item">

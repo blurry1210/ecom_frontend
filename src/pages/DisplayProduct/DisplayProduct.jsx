@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useCart } from "../Cart/CartContext";
 import { useFavorites } from "../Favorite/FavoritesContext";
-import "./DisplayProduct.less";
+import "./DisplayProduct.css";
 import { useNotification } from "../../components/notifications/NotificationContext";
 
 function DisplayProducts({ products, setProducts }) {
@@ -58,7 +58,6 @@ function DisplayProducts({ products, setProducts }) {
             <img
               src={`http://localhost:5000/${product.images[0]}`}
               alt={product.name}
-              style={{ width: "100%", height: "auto" }}
             />
             <h2>{product.name}</h2>
           </Link>
@@ -66,19 +65,15 @@ function DisplayProducts({ products, setProducts }) {
           <p className="category">
             {product.category} - {product.subcategory}
           </p>
-          <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-          <button
-            onClick={() => handleToggleFavorite(product)}
-            className={
-              favorites.includes(product._id)
-                ? "favorite-button active"
-                : "favorite-button"
-            }
-          >
-            {favorites.includes(product._id)
-              ? "Remove from Favorites"
-              : "Add to Favorites"}
-          </button>
+          <div className="buttons">
+            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
+            <button
+              onClick={() => handleToggleFavorite(product)}
+              className={`favorite-button ${favorites.includes(product._id) ? 'active' : ''}`}
+            >
+              <span className="fa fa-heart"></span>
+            </button>
+          </div>
         </div>
       ))}
     </div>

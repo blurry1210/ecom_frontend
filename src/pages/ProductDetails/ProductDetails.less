@@ -1,5 +1,5 @@
 .product-details {
-  max-width: 1200px;
+  max-width: 80%; /* Increased the max-width for a wider container */
   margin: 0 auto;
   padding: 20px;
 
@@ -31,10 +31,12 @@
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start; /* Adjusted to align content to the left */
+      min-height: auto; /* Removed fixed height */
 
       .product-description {
         margin-bottom: 20px;
+        width: 100%; /* Ensure full width */
       }
 
       .product-price {
@@ -52,8 +54,11 @@
         display: flex;
         gap: 10px;
         margin-bottom: 20px;
+        width: 100%; /* Ensure full width */
+        justify-content: flex-start; /* Align buttons to the left */
 
-        .add-to-cart, .add-to-favorites {
+        .add-to-cart,
+        .add-to-favorites {
           padding: 10px 20px;
           background-color: #007bff;
           color: #fff;
@@ -86,7 +91,8 @@
           display: block;
           margin-bottom: 10px;
 
-          select, textarea {
+          select,
+          textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;

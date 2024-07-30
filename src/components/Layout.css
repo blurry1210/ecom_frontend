@@ -1,0 +1,6 @@
+/* Ensure the header does not overlap with the content */
+.header-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

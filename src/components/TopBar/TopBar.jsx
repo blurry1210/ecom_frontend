@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./TopBar.less";
+import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "../button/Button";
 import SearchBar from "../SearchBar/SearchBar";
 import { useAuth } from "../../pages/login/AuthContext";
 import { useNotification } from "../notifications/NotificationContext";
+import "./TopBar.css"; // Custom styles
 
 const TopBar = ({ setProducts }) => {
   const { auth, setAuth } = useAuth();
@@ -27,44 +28,78 @@ const TopBar = ({ setProducts }) => {
   };
 
   return (
-    <div className="top-bar">
-      <div className="left-button-group">
-        <Link to="/products" className="header-button-link">
-          <Button className="header-button">Products</Button>
-        </Link>
-        {auth.isLoggedIn && auth.user && auth.user.role === "distributor" && (
-          <Button className="header-button" onClick={handleAddProductClick}>
-            Add Product
-          </Button>
-        )}
-      </div>
-      <div className="center-container">
+    <nav className="top-bar navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
         <SearchBar setProducts={setProducts} />
-      </div>
-      <div className="button-group">
-        {auth.isLoggedIn && auth.user ? (
-          <div className="dropdown">
-            <Button className="header-button">My Account</Button>
-            <div className="dropdown-content">
-              <Link to={`/profile/${auth.user.id}`}>View Profile</Link>
-              <Link to="/" onClick={handleLogout}>
-                Logout
+        <Link to="/products" className="navbar-brand">
+          TechHub
+        </Link>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTopBar"
+          aria-controls="navbarTopBar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarTopBar">
+          <ul className="navbar-nav ms-auto">
+            {auth.isLoggedIn && auth.user ? (
+              <li className="nav-item dropdown high-zindex-dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdownAccount"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  My Account
+                </a>
+                <ul className="dropdown-menu high-zindex-dropdown-menu" aria-labelledby="navbarDropdownAccount">
+                  <li>
+                    <Link to={`/profile/${auth.user.id}`} className="dropdown-item">
+                      View Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <a className="dropdown-item" href="/" onClick={handleLogout}>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  My Account
+                </Link>
+              </li>
+            )}
+            <li className="nav-item">
+              <Link to="/cart" className="nav-link">
+                Cart
               </Link>
-            </div>
-          </div>
-        ) : (
-          <Link to="/login" className="header-button-link">
-            <Button className="header-button">My Account</Button>
-          </Link>
-        )}
-        <Link to="/cart" className="header-button-link">
-          <Button className="header-button">Cart</Button>
-        </Link>
-        <Link to="/favorites" className="header-button-link">
-          <Button className="header-button">Favorites</Button>
-        </Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/favorites" className="nav-link">
+                Favorites
+              </Link>
+            </li>
+            {auth.isLoggedIn && auth.user && auth.user.role === "distributor" && (
+              <li className="nav-item">
+                <Button className="btn btn-primary" onClick={handleAddProductClick}>
+                  Add Product
+                </Button>
+              </li>
+            )}
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

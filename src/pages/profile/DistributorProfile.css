@@ -1,0 +1,90 @@
+:root {
+  --gap: 15px;
+  --white: #fbfbfb;
+  --black: #333333;
+  --color1: #fda085;
+  --color2: #bff098;
+  --color3: #ea8d8d;
+  --color4: #d8b5ff;
+  --color5: #c6ea8d;
+  --color6: #ff758c;
+  --color7: #868f96;
+  --color8: #c79081;
+  --color9: #8baaaa;
+  --color10: #60b347;
+  --color11: #4ca1af;
+  --button-background: #007bff;
+  --button-hover-background: #0056b3;
+}
+
+body {
+  background-color: var(--black);
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--black);
+  color: var(--white);
+  font-family: "Varela Round", sans-serif;
+}
+
+.profile-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.menu {
+  width: 200px;
+  background-color: var(--black);
+  color: var(--white);
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+
+  ol {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 10px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: var(--button-hover-background);
+      }
+
+      a {
+        color: var(--white);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+/* Ensuring the dropdown menu is on top */
+.nav-item .dropdown-menu {
+  z-index: 9999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991px) {
+  .navbar {
+    background-color: transparent;
+  }
+
+  .navbar-collapse {
+    display: none !important;
+  }
+
+  .menu {
+    display: none; /* Hide the side menu on smaller screens */
+  }
+
+  .profile-container {
+    flex-direction: column; /* Stack the content vertically on smaller screens */
+  }
+}

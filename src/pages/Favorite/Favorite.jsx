@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { useCart } from "../Cart/CartContext";
 import { useFavorites } from "../Favorite/FavoritesContext";
 import Navbar from "../../components/navbar/Navbar";
-import "./Favorite.less";
+import TopBar from "../../components/TopBar/TopBar";
+import "./Favorite.css";
 
 function FavoritesPage({ products = [] }) {
   const { addToCart } = useCart();
@@ -27,15 +28,18 @@ function FavoritesPage({ products = [] }) {
   if (!Array.isArray(products) || products.length === 0) {
     console.error("Products is not an array or empty:", products);
     return (
-      <div className="favorites-container" style={pageStyles}>
-        <Navbar />
-        <p>Error loading products. Please try again later.</p>
-        <button
-          onClick={handleContinueShopping}
-          className="continue-shopping-button"
-        >
-          Back to shopping
-        </button>
+      <div>
+        <TopBar />
+        <div className="container-favorite" style={pageStyles}>
+          <Navbar />
+          <p className="mesaj-eroare">Eroare la încărcarea produselor. Vă rugăm să încercați din nou mai târziu.</p>
+          <button
+            onClick={() => navigate(-1)}
+            className="buton-continua-cumparaturile"
+          >
+            Înapoi la cumpărături
+          </button>
+        </div>
       </div>
     );
   }
@@ -48,7 +52,7 @@ function FavoritesPage({ products = [] }) {
 
   const handleAddToCart = (product) => {
     addToCart(product);
-    alert("Item added to cart!");
+    alert("Produs adăugat în coș!");
   };
 
   const handleContinueShopping = () => {
@@ -57,50 +61,58 @@ function FavoritesPage({ products = [] }) {
 
   if (favoriteProducts.length === 0) {
     return (
-      <div className="favorites-container" style={pageStyles}>
-        <Navbar />
-        <div>
-          <p className="no-fav-mes">No favorites added.</p>
+      <div>
+        <TopBar />
+        <div className="container-favorite" style={pageStyles}>
+          <Navbar />
+          <div>
+            <p className="mesaj-niciun-favorit">Nu ați adăugat niciun favorit.</p>
+          </div>
+          <button
+            onClick={handleContinueShopping}
+            className="buton-continua-cumparaturile"
+          >
+            Înapoi la cumpărături
+          </button>
         </div>
-        <button
-          onClick={handleContinueShopping}
-          className="continue-shopping-button"
-        >
-          Back to shopping
-        </button>
       </div>
     );
   }
 
   return (
-    <div className="favorites-container" style={pageStyles}>
-      <Navbar />
-      <h2 className="text-favorite">Your Favorites</h2>
-      {favoriteProducts.map((product) => (
-        <div key={product._id} className="product-card">
-          <img
-            src={`http://localhost:5000/${product.images[0]}`}
-            alt={product.name}
-            style={{ width: "100%", height: "auto" }}
-          />
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p className="price">${product.price}</p>
-          <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-          <button
-            onClick={() => toggleFavorite(product._id)}
-            className="remove-favorite-button"
-          >
-            Remove from Favorites
-          </button>
+    <div>
+      <TopBar />
+      <div className="container-favorite" style={pageStyles}>
+        <Navbar />
+        <h2 className="text-favorite">Favoritele tale</h2>
+        <div className="grid-produse">
+          {favoriteProducts.map((product) => (
+            <div key={product._id} className="card-produs">
+              <img
+                src={`http://localhost:5000/${product.images[0]}`}
+                alt={product.name}
+              />
+              <h2>{product.name}</h2>
+              <p className="pret">${product.price}</p>
+              <div className="buttons-container">
+                <button onClick={() => handleAddToCart(product)}>Adaugă în coș</button>
+                <button
+                  onClick={() => toggleFavorite(product._id)}
+                  className="buton-elimina-favorit"
+                >
+                  Elimină din favorite
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-      <button
-        onClick={handleContinueShopping}
-        className="continue-shopping-button"
-      >
-        Back to shopping
-      </button>
+        <button
+          onClick={handleContinueShopping}
+          className="buton-continua-cumparaturile"
+        >
+          Înapoi la cumpărături
+        </button>
+      </div>
     </div>
   );
 }

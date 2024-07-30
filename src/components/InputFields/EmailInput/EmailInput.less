@@ -1,13 +1,34 @@
 .email-input-field {
   margin-bottom: 20px;
-  
 }
 
 .email-input-field input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  color: rgb(0, 0, 0); 
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+  color: #000 !important; 
+  background-color: #fff !important;
+  font-size: 16px !important;
+  transition: border-color 0.3s, box-shadow 0.3s !important; /* Smooth transition for focus effects */
+}
+
+.email-input-field input:focus {
+  border-color: #007bff !important;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25) !important; /* Subtle shadow on focus */
+  outline: none !important;
+}
+
+.email-input-field input::placeholder {
+  color: #ccc !important; /* Subtle placeholder color */
+  opacity: 1 !important; /* Ensure the placeholder is fully visible */
+}
+
+.email-input-field input:-ms-input-placeholder {
+  color: #ccc !important;
+}
+
+.email-input-field input::-ms-input-placeholder {
+  color: #ccc !important;
 }

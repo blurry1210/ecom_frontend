@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from "../../components/button/Button";
-import TextInput from "../../components/InputFields/TextInput/TextInput";
+import TopBar from "../../components/TopBar/TopBar";
 import './register.less';
 
 const Register = () => {
@@ -47,35 +47,108 @@ const Register = () => {
     };
 
     return (
-        <div className="register-container">
-            <div className="register-heading">Create a new account</div>
-            {error && <div className="error-message">{error}</div>}
-            {success && <div className="success-message">{success}</div>}
-            <div className="register-form">
-                <form autoComplete="off" onSubmit={register}>
-                    <TextInput label="First Name" name="firstName" value={user.firstName} onChange={handleChange} />
-                    <TextInput label="Last Name" name="lastName" value={user.lastName} onChange={handleChange} />
-                    <TextInput label="Email" name="email" value={user.email} onChange={handleChange} />
-                    <TextInput label="Phone Number" name="phoneNumber" value={user.phoneNumber} onChange={handleChange} />
-                    <TextInput label="Password" name="password" type="password" value={user.password} onChange={handleChange} />
-                    <TextInput label="Confirm Password" name="confirmPassword" type="password" value={user.confirmPassword} onChange={handleChange} />
-                    <div className="role-selection">
-                        <label>
-                            <input type="radio" name="role" value="user" checked={user.role === 'user'} onChange={handleChange} />
-                            User
-                        </label>
-                        <label>
-                            <input type="radio" name="role" value="distributor" checked={user.role === 'distributor'} onChange={handleChange} />
-                            Distributor
-                        </label>
+        <div>
+            <TopBar />
+            <div className="container register-container">
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h2 className="text-center">Create a new account</h2>
+                                {error && <div className="alert alert-danger">{error}</div>}
+                                {success && <div className="alert alert-success">{success}</div>}
+                                <form autoComplete="off" onSubmit={register}>
+                                    <div className="form-group">
+                                        <label>First Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="firstName"
+                                            value={user.firstName}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Last Name</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="lastName"
+                                            value={user.lastName}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Email</label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            name="email"
+                                            value={user.email}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Phone Number</label>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            name="phoneNumber"
+                                            value={user.phoneNumber}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control"
+                                            name="password"
+                                            value={user.password}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <label>Confirm Password</label>
+                                        <input
+                                            type="password"
+                                            className="form-control"
+                                            name="confirmPassword"
+                                            value={user.confirmPassword}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    <div className="form-group form-check">
+                                        <input
+                                            type="radio"
+                                            className="form-check-input"
+                                            name="role"
+                                            value="user"
+                                            checked={user.role === "user"}
+                                            onChange={handleChange}
+                                        />
+                                        <label className="form-check-label">User</label>
+                                    </div>
+                                    <div className="form-group form-check">
+                                        <input
+                                            type="radio"
+                                            className="form-check-input"
+                                            name="role"
+                                            value="distributor"
+                                            checked={user.role === "distributor"}
+                                            onChange={handleChange}
+                                        />
+                                        <label className="form-check-label">Distributor</label>
+                                    </div>
+                                    <Button type="submit" className="btn btn-primary btn-block">Register</Button>
+                                </form>
+                                <div className="text-center mt-3">
+                                    Already have an account? <Link to="/login">Sign In</Link>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="button-container">
-                        <Button type="submit">Register</Button>
-                    </div>
-                </form>
-            </div>
-            <div className="sign-in-link">
-                Already have an account? <Link to="/login">Sign In</Link>
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './ItemForm.less'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ItemForm = () => {
     const [itemData, setItemData] = useState({
@@ -48,22 +48,38 @@ const ItemForm = () => {
     };
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleSubmit}>
-                <label>Name:</label>
-                <input type="text" name="name" value={itemData.name} onChange={handleChange} />
-                <label>Description:</label>
-                <textarea name="description" value={itemData.description} onChange={handleChange} />
-                <label>Price:</label>
-                <input type="number" name="price" value={itemData.price} onChange={handleChange} />
-                <label>Main Category:</label>
-                <input type="text" name="main" value={itemData.categories.main} onChange={handleChange} />
-                <label>Sub Category:</label>
-                <input type="text" name="sub" value={itemData.categories.sub} onChange={handleChange} />
-                <label>Images (comma-separated URLs):</label>
-                <input type="text" name="images" value={itemData.images.join(',')} onChange={handleChange} />
-                <button type="submit">Submit</button>
-            </form>
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="name" className="form-label">Name:</label>
+                            <input type="text" className="form-control" id="name" name="name" value={itemData.name} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description:</label>
+                            <textarea className="form-control" id="description" name="description" value={itemData.description} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="price" className="form-label">Price:</label>
+                            <input type="number" className="form-control" id="price" name="price" value={itemData.price} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="main" className="form-label">Main Category:</label>
+                            <input type="text" className="form-control" id="main" name="main" value={itemData.categories.main} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="sub" className="form-label">Sub Category:</label>
+                            <input type="text" className="form-control" id="sub" name="sub" value={itemData.categories.sub} onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="images" className="form-label">Images (comma-separated URLs):</label>
+                            <input type="text" className="form-control" id="images" name="images" value={itemData.images.join(',')} onChange={handleChange} />
+                        </div>
+                        <button type="submit" className="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };

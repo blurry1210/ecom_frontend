@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../../components/button/Button";
+import TopBar from "../../components/TopBar/TopBar"; // Import TopBar
 import { useAuth } from "./AuthContext";
 import { useNotification } from "../../components/notifications/NotificationContext";
-import "./login.less";
+import "./login.css";
 import EmailInput from "../../components/InputFields/EmailInput/EmailInput";
 import PasswordInput from "../../components/InputFields/PasswordInput/PasswordInput";
 
@@ -77,24 +78,26 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-heading">Login To Your Account</div>
-      <div className="login-form">
-        <form autoComplete="off" onSubmit={login}>
-          <EmailInput value={user.email} handleChange={handleChange} />
-          <PasswordInput value={user.password} handleChange={handleChange} />
-          <div className="button-container">
-            <Button type="submit">Login</Button>
-          </div>
-          {error && <p className="error-message">{error}</p>}
-        </form>
-      </div>
-      <div className="forgot-password-link">
-        <Link to="/login/forgot_password">Forgot Your Password?</Link>
-      </div>
-      <div className="create-account-link">
-        <span>You don't have an account?</span>
-        <Link to="/account/register">Create One</Link>
+    <div>
+      <div className="login-container">
+        <div className="login-heading">Login To Your Account</div>
+        <div className="login-form">
+          <form autoComplete="off" onSubmit={login}>
+            <EmailInput value={user.email} handleChange={handleChange} />
+            <PasswordInput value={user.password} handleChange={handleChange} />
+            <div className="button-container">
+              <Button type="submit">Login</Button>
+            </div>
+            {error && <p className="error-message">{error}</p>}
+          </form>
+        </div>
+        <div className="forgot-password-link">
+          <Link to="/login/forgot_password">Forgot Your Password?</Link>
+        </div>
+        <div className="create-account-link">
+          <span>You don't have an account?</span>
+          <Link to="/account/register">Create One</Link>
+        </div>
       </div>
     </div>
   );
