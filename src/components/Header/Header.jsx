@@ -8,7 +8,6 @@ const Header = ({ setProducts }) => {
   return (
     <div className="header-container">
       <TopBar setProducts={setProducts} />
-      <Navbar />
     </div>
   );
 };

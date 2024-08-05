@@ -1,23 +1,26 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
 .products-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 15px; /* Set gap to 15px for consistent spacing */
   padding: 20px;
-  margin-top: 120px; /* Increased top margin to avoid overlapping */
 }
 
 .product-card {
-  background-color: #5a5a5e; /* Darker background */
-  color: #fff !important; /* White font color with !important */
-  padding: 10px;
-  border-radius: 5px;
+  background-color: #333; /* Darker background */
+  color: #fff; /* White font color */
+  padding: 20px;
+  border-radius: 8px;
   position: relative;
   transition: transform 0.2s, box-shadow 0.2s;
-  text-align: center; /* Center-align text */
+  text-align: center;
   display: flex;
-  flex-direction: column; /* Arrange elements in a column */
-  justify-content: space-between; /* Distribute space evenly */
-  height: 100%; /* Make sure the card takes the full height */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 270px; /* Smaller width */
+  height: 400px; /* Smaller height */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product-card:hover {
@@ -28,58 +31,59 @@
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 150px; /* Stable dimension */
-  object-fit: contain; /* Ensure images fit within bounds */
+  max-height: 160px; /* Smaller image */
+  object-fit: contain;
+  margin-bottom: 10px;
 }
 
-.product-card h2,
-.product-card p,
-.product-card .category {
-  color: #fff !important; /* White font color with !important */
-  margin: 0;
-}
-
-.product-card .category {
-  margin-bottom: 30px; /* 30px from the buttons */
+.product-card h2 {
+  font-size: 1.5rem; /* Smaller font size */
+  margin: 0 0 10px;
+  color: #fff; /* Set the product title color to white */
 }
 
 .product-card .price {
-  margin-bottom: 30px; /* 30px from the category name */
+  font-size: 1.2rem; /* Price font size */
+  color: #007bff; /* Color of the price */
+  margin: 0 0 20px;
 }
 
 .product-card .buttons {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: auto; /* Push the buttons to the bottom */
-  margin-bottom: 10px; /* 10px from the bottom of the card */
+  justify-content: center; /* Center the button */
+  align-items: center;
+  margin-top: 10px;
 }
 
 .product-card button {
   background-color: #007bff;
-  color: #fff !important; /* White font color with !important */
+  color: #fff !important; /* Ensure white font color */
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem; /* Ensure the text size is readable */
 }
 
 .product-card button:hover {
   background-color: #0056b3;
 }
 
-.favorite-button {
-  background: none;
-  border: none;
-  color: #fff !important; /* White font color with !important */
+.favorite-icon {
+  font-size: 1.5em;
   cursor: pointer;
-  font-size: 1.5em;
+  color: #ddd; /* Default heart color */
+  transition: color 0.2s;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
-.favorite-button.active {
-  color: red !important; /* Red color for active state */
+.favorite-icon.active {
+  color: red; /* Red color when active */
 }
 
-.favorite-button .fa-heart {
-  font-size: 1.5em;
+.favorite-icon:hover {
+  color: #ff6666;
 }

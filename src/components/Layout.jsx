@@ -23,9 +23,9 @@ const Layout = ({ children }) => {
       location.pathname.startsWith("/profile"));
 
   const layoutStyles = isProfileOrFavoritesPage
-    ? { paddingTop: "15vh", paddingLeft: "15vw", boxSizing: "border-box" }
+    ? { paddingTop: "0vh", paddingLeft: "0vw", boxSizing: "border-box" }
     : isCartPage || isProductPage
-    ? { paddingTop: "15vh" }
+    ? { paddingTop: "0vh" }
     : {};
 
   return (

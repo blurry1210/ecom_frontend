@@ -139,8 +139,6 @@ function AddProduct() {
 
   return (
     <div>
-      <TopBar />
-      <Navbar />
       <div className="add-product-form">
         <form onSubmit={handleSubmit}>
           <div className="form-column">

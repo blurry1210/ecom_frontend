@@ -89,14 +89,14 @@ function ProductDetails() {
 
   return (
     <div className="product-details">
-      <h1>{product.name}</h1>
       <div className="product-details-container">
         <div className="product-image">
           <img src={`http://localhost:5000/${product.images[0]}`} alt={product.name} />
         </div>
         <div className="product-info">
-          <p className="product-description">{product.description}</p>
+          <h1 className="product-name">{product.name}</h1>
           <p className="product-price">${product.price}</p>
+          <p className="product-description">{product.description}</p>
           <p className="product-distributor">Sold by: {product.distributor.firstName} {product.distributor.lastName}</p>
           <div className="product-actions">
             <button className="add-to-cart" onClick={handleAddToCart}>Add to Cart</button>
@@ -130,21 +130,21 @@ function ProductDetails() {
               </form>
             </div>
           )}
-          <div className="reviews">
-            <h3>Reviews</h3>
-            {reviews.length === 0 ? (
-              <p>No reviews yet</p>
-            ) : (
-              reviews.map(review => (
-                <div key={review._id} className="review">
-                  <p><strong>{review.user.firstName} {review.user.lastName}</strong> ({new Date(review.createdAt).toLocaleDateString()})</p>
-                  <p>Rating: {review.rating}</p>
-                  <p>{review.comment}</p>
-                </div>
-              ))
-            )}
-          </div>
         </div>
+      </div>
+      <div className="reviews">
+        <h3>Reviews</h3>
+        {reviews.length === 0 ? (
+          <p>No reviews yet</p>
+        ) : (
+          reviews.map(review => (
+            <div key={review._id} className="review">
+              <p><strong>{review.user.firstName} {review.user.lastName}</strong> ({new Date(review.createdAt).toLocaleDateString()})</p>
+              <p>Rating: {review.rating}</p>
+              <p>{review.comment}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

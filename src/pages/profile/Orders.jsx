@@ -32,8 +32,8 @@ const Orders = ({ userId }) => {
     }
   }, [userId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="orders-container">
@@ -42,9 +42,9 @@ const Orders = ({ userId }) => {
         {orders.map(order => (
           <Link to={`${order._id}`} key={order._id} className="order-card">
             <div className="order-info">
-              <p>Order ID: {order._id}</p>
-              <p>Date: {new Date(order.createdAt).toLocaleDateString()}</p>
-              <p>Total: ${order.totalPrice.toFixed(2)}</p>
+              <p><strong>Order ID:</strong> {order._id}</p>
+              <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
+              <p><strong>Total:</strong> ${order.totalPrice.toFixed(2)}</p>
             </div>
             <div className="order-items-preview">
               {order.items.slice(0, 3).map(item => (

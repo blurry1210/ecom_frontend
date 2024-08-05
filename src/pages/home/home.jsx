@@ -42,10 +42,9 @@ const Home = () => {
 
   return (
     <div className="home">
-      <TopBar setProducts={setProducts} />
-      <Navbar />
       <div className="content-container">
         <div className="navigation-container">
+          <Navbar />
           <FilterComponent setProducts={setProducts} />
         </div>
         <ErrorBoundary>

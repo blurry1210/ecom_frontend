@@ -15,20 +15,33 @@
 @COLOR10: #60b347;
 @COLOR11: #4ca1af;
 
+/* Container for the entire cart page */
+.cart-page-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  height: 100vh;
+  width: 100%;
+  background-color: @BLACK;
+  color: @WHITE;
+  font-family: "Quicksand", sans-serif;
+}
+
+/* Container for the cart */
 .cart-container {
-  background-color: #ffffff;
+  background-color: @WHITE;
   border-radius: 8px;
   padding: 20px;
   margin: 70px auto;
-  max-width: 800px;
+  max-width: 1000px; /* Increased width for the cart container */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Quicksand", sans-serif;
   align-items: center;
+  flex-grow: 1; /* Allow the cart container to grow */
 }
 
 h2 {
   font-size: 2rem;
-  color: #333;
+  color: @BLACK;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -67,7 +80,7 @@ h2 {
     h3 {
       margin: 0;
       font-size: 1.5rem;
-      color: #333;
+      color: @BLACK;
     }
 
     p {
@@ -165,5 +178,34 @@ h2 {
     position: absolute;
     bottom: -10px;
     left: @GAP;
+  }
+}
+
+/* Profile menu */
+.menu {
+  width: 250px; /* Reduced width for the profile menu */
+  background-color: @BLACK;
+  color: @WHITE;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+
+  ol {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding: 10px;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: @COLOR7;
+      }
+
+      a {
+        color: @WHITE;
+        text-decoration: none;
+      }
+    }
   }
 }

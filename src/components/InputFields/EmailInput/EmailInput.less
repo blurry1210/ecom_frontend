@@ -1,34 +1,53 @@
 .email-input-field {
   margin-bottom: 20px;
+  display: flex; /* Align icon and input field */
+  align-items: center;
+  position: relative; /* For positioning the icon */
 }
 
 .email-input-field input {
   width: 100% !important;
-  padding: 12px !important;
+  padding: 12px 40px 12px 16px !important; /* Extra padding for icon space */
   border: 1px solid #ccc !important;
-  border-radius: 4px !important;
+  border-radius: 25px !important; /* Rounded corners for modern look */
   box-sizing: border-box !important;
-  color: #000 !important; 
-  background-color: #fff !important;
+  color: #333 !important; /* Darker text color for readability */
+  background-color: #f9f9f9 !important; /* Light background */
   font-size: 16px !important;
-  transition: border-color 0.3s, box-shadow 0.3s !important; /* Smooth transition for focus effects */
-}
-
-.email-input-field input:focus {
-  border-color: #007bff !important;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25) !important; /* Subtle shadow on focus */
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s !important; /* Smooth transition for focus effects */
   outline: none !important;
 }
 
+.email-input-field input:focus {
+  border-color: #007bff !important; /* Blue border on focus */
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.25) !important; /* Subtle shadow on focus */
+  background-color: #fff !important; /* Slightly lighter background on focus */
+}
+
 .email-input-field input::placeholder {
-  color: #ccc !important; /* Subtle placeholder color */
+  color: #aaa !important; /* Slightly darker placeholder color for better contrast */
   opacity: 1 !important; /* Ensure the placeholder is fully visible */
 }
 
 .email-input-field input:-ms-input-placeholder {
-  color: #ccc !important;
+  color: #aaa !important;
 }
 
 .email-input-field input::-ms-input-placeholder {
-  color: #ccc !important;
+  color: #aaa !important;
+}
+
+/* Styling for the search icon inside the input field */
+.search-icon {
+  position: absolute;
+  right: 16px;
+  color: #999; /* Gray color for the icon */
+  font-size: 18px;
+  pointer-events: none; /* Ensure the icon doesn’t interfere with input focus */
+}
+
+/* Optional hover effect */
+.email-input-field input:hover {
+  background-color: #e9ecef !important; /* Slightly darker shade on hover */
+  border-color: #bbb !important; /* Slightly darker border on hover */
 }

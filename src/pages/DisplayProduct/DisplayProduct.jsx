@@ -62,17 +62,12 @@ function DisplayProducts({ products, setProducts }) {
             <h2>{product.name}</h2>
           </Link>
           <p className="price">${product.price}</p>
-          <p className="category">
-            {product.category} - {product.subcategory}
-          </p>
           <div className="buttons">
             <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            <button
+            <span
               onClick={() => handleToggleFavorite(product)}
-              className={`favorite-button ${favorites.includes(product._id) ? 'active' : ''}`}
-            >
-              <span className="fa fa-heart"></span>
-            </button>
+              className={`favorite-icon fa fa-heart ${favorites.includes(product._id) ? 'active' : ''}`}
+            ></span>
           </div>
         </div>
       ))}

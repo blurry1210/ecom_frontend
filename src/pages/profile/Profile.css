@@ -57,7 +57,7 @@ body {
 }
 
 .menu {
-  width: 200px;
+  width: 200px !important;
   background-color: var(--black);
   color: var(--white);
   padding: 20px;

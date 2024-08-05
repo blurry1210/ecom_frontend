@@ -5,7 +5,11 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        // Retrieve cart items from localStorage on initial load
+        const savedCart = localStorage.getItem('cartItems');
+        return savedCart ? JSON.parse(savedCart) : [];
+    });
 
     const addToCart = (product) => {
         setCartItems(prevCart => {
@@ -32,6 +36,8 @@ export const CartProvider = ({ children }) => {
     };
 
     useEffect(() => {
+        // Save cart items to localStorage whenever they change
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
         console.log("Cart after update:", cartItems);
     }, [cartItems]);
 

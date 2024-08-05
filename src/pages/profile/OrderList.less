@@ -1,46 +1,103 @@
-// OrderList.less
+// Import font styles
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
 
-.order-list-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+@mainColor: #333333;
+@accentColor: #007bff;
+@whiteColor: #ffffff;
+@backgroundColor: #f9f9f9;
+@shadowColor: rgba(0, 0, 0, 0.1);
+@borderColor: #eee;
+@hoverShadow: rgba(0, 0, 0, 0.2);
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: @backgroundColor;
 }
 
+// Container for the order list
+.order-list-container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 40px auto;
+  background: @whiteColor;
+  box-shadow: 0 0 15px @shadowColor;
+  border-radius: 10px;
+}
+
+// Styling for the order list title
 .order-list-container h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: @mainColor;
+  font-weight: 600;
 }
 
+// Individual order summary box
 .order-summary {
-  padding: 15px;
-  margin-bottom: 15px;
-  border: 1px solid #eee;
-  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid @borderColor;
+  border-radius: 10px;
   transition: box-shadow 0.3s;
+  background: @whiteColor;
+  text-align: center;
+
+  &:hover {
+    box-shadow: 0 0 20px @hoverShadow;
+  }
 }
 
-.order-summary:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+// Link styling for the entire order summary box
+.order-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
 }
 
-.order-summary p {
-  margin: 5px 0;
-  font-size: 16px;
+// Order information styling
+.order-info {
+  margin-bottom: 15px;
+
+  p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: @mainColor;
+    strong {
+      font-weight: 600;
+      color: @accentColor;
+    }
+  }
 }
 
+// Styling for the images of the ordered items
 .order-items-images {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
   margin-top: 10px;
 }
 
+// Styling for each image in the order summary
 .order-items-images img {
-  width: 50px;
-  height: 50px;
-  border-radius: 4px;
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
   object-fit: cover;
+  border: 1px solid @borderColor;
+}
+
+// Center the loading message
+.loading,
+.error-message,
+.no-orders-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: @mainColor;
+  padding: 20px;
 }

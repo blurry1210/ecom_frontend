@@ -26,7 +26,7 @@ const OrderList = ({ userId }) => {
 
         const ordersData = response.data;
 
-        
+        // Fetch product details for each item in the orders
         const productRequests = ordersData.map(order =>
           Promise.all(order.items.map(item =>
             axios.get(`http://localhost:5000/api/products/${item.productId}`, {
@@ -60,20 +60,22 @@ const OrderList = ({ userId }) => {
     fetchOrders();
   }, [userId]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-  if (orders.length === 0) return <div>No orders found</div>;
+  if (loading) return <div className="loading">Loading...</div>;
+  if (error) return <div className="error-message">{error}</div>;
+  if (orders.length === 0) return <div className="no-orders-message">No orders found</div>;
 
   return (
     <div className="order-list-container">
       <h2>Your Orders</h2>
       {orders.map(order => (
         <div key={order._id} className="order-summary">
-          <Link to={`/orders/${order._id}`}>
-            <p>Order ID: {order._id}</p>
-            <p>Total: ${order.totalPrice.toFixed(2)}</p>
-            <p>Status: {order.items[0].status}</p>
-            <p>Placed on: {new Date(order.createdAt).toLocaleDateString()}</p>
+          <Link to={`/orders/${order._id}`} className="order-link">
+            <div className="order-info">
+              <p><strong>Order ID:</strong> {order._id}</p>
+              <p><strong>Total:</strong> ${order.totalPrice.toFixed(2)}</p>
+              <p><strong>Status:</strong> {order.items[0].status}</p>
+              <p><strong>Placed on:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
+            </div>
             <div className="order-items-images">
               {order.items.map(item => (
                 <img key={item.productId} src={`http://localhost:5000/${item.product.images[0]}`} alt={item.product.name} />

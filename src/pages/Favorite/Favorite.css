@@ -2,33 +2,32 @@
   --gap: 15px;
   --white: #fbfbfb;
   --black: #333333;
-  --color1: #fda085;
-  --color2: #bff098;
-  --color3: #ea8d8d;
-  --color4: #d8b5ff;
-  --color5: #c6ea8d;
-  --color6: #ff758c;
   --color7: #868f96;
-  --color8: #c79081;
-  --color9: #8baaaa;
-  --color10: #60b347;
-  --color11: #4ca1af;
+  --button-background: #007bff;
+  --button-hover-background: #0056b3;
 }
 
 body {
   background-color: #333333;
 }
 
+.favorites-page-container {
+  margin-left:50px !important;
+  display: flex;
+  flex-direction: row; /* Aligns menu and favorites side by side */
+  align-items: flex-start;
+  margin: 20px auto;
+  max-width: 1500px;
+}
+
 .container-favorite {
-  background-color: #6c6cb0;
+  width:2000px !important;
+  margin-left: 20px;
+  background-color: #585860;
   border-radius: 8px;
   padding: 20px;
-  margin: 20px auto;
-  max-width: 1200px;
+  flex-grow: 1; /* Allow favorites container to take remaining space */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   color: #fff;
   z-index: 100; /* Ensures container is above other elements */
 }
@@ -89,7 +88,7 @@ body {
 .card-produs button {
   padding: 10px 20px;
   margin: 5px auto;
-  background-color: #007bff;
+  background-color: var(--button-background);
   color: white;
   border: none;
   border-radius: 5px;
@@ -99,7 +98,7 @@ body {
 }
 
 .card-produs button:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-background);
 }
 
 .card-produs .buton-elimina-favorit {
@@ -111,7 +110,7 @@ body {
 }
 
 .buton-continua-cumparaturile {
-  background-color: #007bff;
+  background-color: var(--button-background);
   align-self: flex-start;
   color: white;
   padding: 10px 20px;
@@ -123,7 +122,7 @@ body {
 }
 
 .buton-continua-cumparaturile:hover {
-  background-color: #0056b3;
+  background-color: var(--button-hover-background);
 }
 
 .mesaj-niciun-favorit,
@@ -157,4 +156,38 @@ body {
   position: absolute;
   bottom: -10px;
   left: var(--gap);
+}
+
+.menu {
+  width: 500px !important; /* Full width menu */
+  background-color: var(--black);
+  color: var(--white);
+  padding: 20px;
+  height: 100vh; /* Full height for the menu */
+  overflow-y: auto;
+
+  ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding: 10px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #444444;
+    }
+
+    a {
+      color: var(--white);
+      text-decoration: none;
+    }
+  }
+
+  .active {
+    background-color: #007bff; /* Highlight active link */
+  }
 }

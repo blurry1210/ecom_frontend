@@ -5,13 +5,10 @@ import './Navbar.css'; // Custom styles for specific design elements
 
 const Navbar = () => {
   return (
-    <nav className="navbar-custom navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarCustom">
-          <ul className="navbar-nav">
+    <nav className="navbar-custom navbar bg-dark">
+      <div className="navbar-inner">
+        <div className="navbar-list">
+          <ul className="navbar-nav flex-column">
             <li className="nav-item dropdown">
               <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownTech" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Laptop, Tablete, Telefoane
@@ -109,7 +106,7 @@ const Navbar = () => {
                 <li><Link className="dropdown-item" to={`/products?category=${encodeURIComponent('Gaming, Carti, Birotica')}&subcategory=${encodeURIComponent('Muzica')}`}>Muzica</Link></li>
                 <li><Link className="dropdown-item" to={`/products?category=${encodeURIComponent('Gaming, Carti, Birotica')}&subcategory=${encodeURIComponent('Consumabile si accesorii birou')}`}>Consumabile si accesorii birou</Link></li>
               </ul>
-            </li> 
+            </li>
           </ul>
         </div>
       </div>

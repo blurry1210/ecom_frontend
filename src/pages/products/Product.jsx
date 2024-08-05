@@ -14,9 +14,6 @@ function Product() {
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) || []
   );
-  const [rating, setRating] = useState(0);
-  const [distributorRating, setDistributorRating] = useState(0);
-  const [user, setUser] = useState(null);
   const [review, setReview] = useState({ rating: "", comment: "" });
   const [reviews, setReviews] = useState([]);
   const { auth } = useAuth();
@@ -32,7 +29,6 @@ function Product() {
         console.log("Product data fetched:", response.data);
         setProduct(response.data);
         setReviews(response.data.reviews || []);
-        setUser(auth.user);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -41,7 +37,7 @@ function Product() {
     };
 
     fetchProduct();
-  }, [productId, auth.user]);
+  }, [productId]);
 
   const toggleFavorite = () => {
     let updatedFavorites;
@@ -59,27 +55,6 @@ function Product() {
   const handleAddToCart = () => {
     addToCart(product);
     showNotification("Item added to cart!", "success");
-  };
-
-  const handleRating = async (type) => {
-    const endpoint =
-      type === "product"
-        ? `/api/items/rate/${productId}`
-        : `/api/items/rate-distributor/${product?.distributor?._id}`;
-
-    try {
-      await axios.post(endpoint, {
-        userId: user._id,
-        rating: type === "product" ? rating : distributorRating,
-      });
-      showNotification(
-        `${type === "product" ? "Product" : "Distributor"} rated successfully!`,
-        "success"
-      );
-    } catch (error) {
-      console.error("Error rating:", error);
-      showNotification("Error rating the item.", "error");
-    }
   };
 
   const handleReviewChange = (e) => {
@@ -125,86 +100,89 @@ function Product() {
   return (
     <div className="product-page">
       <div className="product-details">
-        <img
-          src={`http://localhost:5000/${product.images[0]}`}
-          alt={product.name}
-          className="product-image"
-        />
-        <div className="product-info">
-          <h1>{product.name}</h1>
-          <p className="price">${product.price}</p>
-          <p>{product.description}</p>
-          <p>
-            Distributor: {product.distributor?.firstName}{" "}
-            {product.distributor?.lastName} ({product.distributor?.email})
-          </p>
-          <div className="button-group">
-            <button onClick={handleAddToCart}>Add to Cart</button>
-            <button
-              onClick={toggleFavorite}
-              className={
-                favorites.includes(product._id)
-                  ? "favorite-button active"
-                  : "favorite-button"
-              }
-            >
-              {favorites.includes(product._id)
-                ? "Remove from Favorites"
-                : "Add to Favorites"}
-            </button>
+        <h1 className="product-title">{product.name}</h1>
+        <div className="product-content">
+          <div className="product-image">
+            <img
+              src={`http://localhost:5000/${product.images[0]}`}
+              alt={product.name}
+            />
           </div>
-          {auth.isLoggedIn && (
-            <div className="review-form">
-              <h3>Leave a Review</h3>
-              <form onSubmit={handleReviewSubmit}>
-                <label>
-                  Rating:
-                  <select
-                    name="rating"
-                    value={review.rating}
-                    onChange={handleReviewChange}
-                    required
-                  >
-                    <option value="">Select rating</option>
-                    <option value="1">1 - Poor</option>
-                    <option value="2">2 - Fair</option>
-                    <option value="3">3 - Good</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="5">5 - Excellent</option>
-                  </select>
-                </label>
-                <label>
-                  Comment:
-                  <textarea
-                    name="comment"
-                    value={review.comment}
-                    onChange={handleReviewChange}
-                  ></textarea>
-                </label>
-                <button type="submit">Submit Review</button>
-              </form>
+          <div className="product-info">
+            <p className="price">${product.price}</p>
+            <div className="button-group">
+              <button onClick={handleAddToCart}>Add to Cart</button>
+              <button
+                onClick={toggleFavorite}
+                className={
+                  favorites.includes(product._id)
+                    ? "favorite-button active"
+                    : "favorite-button"
+                }
+              >
+                {favorites.includes(product._id)
+                  ? "Remove from Favorites"
+                  : "Add to Favorites"}
+              </button>
             </div>
-          )}
-          <div className="reviews">
-            <h3>Reviews</h3>
-            {reviews.length === 0 ? (
-              <p>No reviews yet</p>
-            ) : (
-              reviews.map((review) => (
-                <div key={review._id} className="review">
-                  <p>
-                    <strong>
-                      {review.user.firstName} {review.user.lastName}
-                    </strong>{" "}
-                    ({new Date(review.createdAt).toLocaleDateString()})
-                  </p>
-                  <p>Rating: {review.rating}</p>
-                  <p>{review.comment}</p>
-                </div>
-              ))
-            )}
+            <p className="product-description">{product.description}</p>
+            <p>
+              Distributor: {product.distributor?.firstName}{" "}
+              {product.distributor?.lastName} ({product.distributor?.email})
+            </p>
           </div>
         </div>
+      </div>
+      <div className="reviews-section">
+        {auth.isLoggedIn && (
+          <div className="review-form">
+            <h3>Leave a Review</h3>
+            <form onSubmit={handleReviewSubmit}>
+              <label>
+                Rating:
+                <select
+                  name="rating"
+                  value={review.rating}
+                  onChange={handleReviewChange}
+                  required
+                >
+                  <option value="">Select rating</option>
+                  <option value="1">1 - Poor</option>
+                  <option value="2">2 - Fair</option>
+                  <option value="3">3 - Good</option>
+                  <option value="4">4 - Very Good</option>
+                  <option value="5">5 - Excellent</option>
+                </select>
+              </label>
+              <label>
+                Comment:
+                <textarea
+                  name="comment"
+                  value={review.comment}
+                  onChange={handleReviewChange}
+                ></textarea>
+              </label>
+              <button type="submit">Submit Review</button>
+            </form>
+          </div>
+        )}
+        <h3>Reviews</h3>
+        {reviews.length === 0 ? (
+          <p>No reviews yet</p>
+        ) : (
+          reviews.map((review) => (
+            <div key={review._id} className="review">
+              <p>
+                <strong>
+                  {review.user.firstName} {review.user.lastName}
+                </strong>{" "}
+                ({new Date(review.createdAt).toLocaleDateString()})
+              </p>
+              <p>Rating: {review.rating}</p>
+              <p>{review.comment}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

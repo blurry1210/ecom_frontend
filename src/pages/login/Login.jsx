@@ -5,9 +5,7 @@ import Button from "../../components/button/Button";
 import TopBar from "../../components/TopBar/TopBar"; // Import TopBar
 import { useAuth } from "./AuthContext";
 import { useNotification } from "../../components/notifications/NotificationContext";
-import "./login.css";
-import EmailInput from "../../components/InputFields/EmailInput/EmailInput";
-import PasswordInput from "../../components/InputFields/PasswordInput/PasswordInput";
+import "./login.css";  // Ensure this points to your CSS file
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -42,7 +40,6 @@ const Login = () => {
       );
       console.log("Login successful:", response.data);
 
-      
       const userId = response.data.user.id;
       console.log("Fetched userId:", userId);
 
@@ -56,10 +53,8 @@ const Login = () => {
         token: response.data.token,
       });
 
-      
       showNotification("Login successful!", "success");
 
-      
       if (response.data.user.role === "distributor") {
         navigate(`/products`);
       } else {
@@ -69,7 +64,6 @@ const Login = () => {
       console.error("Error logging in:", error);
       setError("Failed to login, please check your credentials and try again.");
 
-      
       showNotification(
         "Failed to login, please check your credentials and try again.",
         "error"
@@ -80,23 +74,43 @@ const Login = () => {
   return (
     <div>
       <div className="login-container">
-        <div className="login-heading">Login To Your Account</div>
-        <div className="login-form">
-          <form autoComplete="off" onSubmit={login}>
-            <EmailInput value={user.email} handleChange={handleChange} />
-            <PasswordInput value={user.password} handleChange={handleChange} />
-            <div className="button-container">
-              <Button type="submit">Login</Button>
+        <div className="card">
+          <div className="card-body">
+            <h2 className="text-center">Login To Your Account</h2>
+            {error && <div className="alert alert-danger">{error}</div>}
+            <form autoComplete="off" onSubmit={login}>
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
+                  className="form-control"
+                  placeholder="Enter your email"
+                />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={user.password}
+                  onChange={handleChange}
+                  className="form-control"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <Button type="submit" className="btn btn-primary btn-block">Login</Button>
+            </form>
+            <div className="text-center mt-3">
+              <Link to="/login/forgot_password">Forgot Your Password?</Link>
             </div>
-            {error && <p className="error-message">{error}</p>}
-          </form>
-        </div>
-        <div className="forgot-password-link">
-          <Link to="/login/forgot_password">Forgot Your Password?</Link>
-        </div>
-        <div className="create-account-link">
-          <span>You don't have an account?</span>
-          <Link to="/account/register">Create One</Link>
+            <div className="text-center mt-3">
+              <span>You don't have an account?</span>
+              <Link to="/account/register">Create One</Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

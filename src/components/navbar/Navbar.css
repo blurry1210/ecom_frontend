@@ -1,9 +1,22 @@
+.navbar{
+  position: relative !important;
+}
 .navbar-custom {
-  margin-top: 56px; /* Adjust this value based on the height of the TopBar */
+  display:flex !important;
+  flex-direction:column !important;
+  background-color: #1e1e1e;
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow for better visibility */
+}
+
+.navbar-custom .nav-item .nav-link {
+  color: #fff;
 }
 
 .navbar-custom .dropdown-menu {
-  z-index: 9998 !important; /* Ensure dropdown is above other elements */
+  z-index: 9998 !important;
   background-color: #343a40;
   border: none;
 }
@@ -14,10 +27,6 @@
 
 .navbar-custom .dropdown-item:hover {
   background-color: #495057;
-}
-
-.navbar-custom .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 991px) {

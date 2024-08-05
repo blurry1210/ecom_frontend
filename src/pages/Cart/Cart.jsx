@@ -1,6 +1,7 @@
 import React from "react";
 import { useCart } from "../Cart/CartContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import ProfileMenu from "../../components/profilemenu/ProfileMenu"; 
 import "./Cart.less";
 
 function CartPage() {
@@ -23,53 +24,59 @@ function CartPage() {
 
   if (!cartItems || cartItems.length === 0) {
     return (
-      <div className="cart-container" style={pageStyles}>
-        <p className="empty-cart-message">Your cart is empty.</p>
-        <div className="cart-footer">
-          <button onClick={() => navigate(-1)} className="back-button">
-            Back to shopping
-          </button>
+      <div className="cart-page-container">
+        <ProfileMenu />
+        <div className="cart-container" style={pageStyles}>
+          <p className="empty-cart-message">Your cart is empty.</p>
+          <div className="cart-footer">
+            <button onClick={() => navigate(-1)} className="back-button">
+              Back to shopping
+            </button>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="cart-container" style={pageStyles}>
-      <h2 className="cart-text">Your Shopping Cart</h2>
-      {cartItems.map(({ product, quantity }) => (
-        <div key={product._id} className="cart-item">
-          <img
-            src={`http://localhost:5000/${product.images[0]}`}
-            alt={product.name}
-            className="cart-item-image"
-          />
-          <div className="cart-item-info">
-            <h3>{product.name}</h3>
-            
-            <p>Price: ${product.price}</p>
-            <p>Quantity: {quantity}</p>
-            <p>Total: ${product.price * quantity}</p>
-            <button
-              onClick={() => removeFromCart(product._id)}
-              className="remove-cart-button"
-            >
-              Remove
-            </button>
+    <div className="cart-page-container">
+      <ProfileMenu />
+      <div className="cart-container" style={pageStyles}>
+        <h2 className="cart-text">Your Shopping Cart</h2>
+        {cartItems.map(({ product, quantity }) => (
+          <div key={product._id} className="cart-item">
+            <img
+              src={`http://localhost:5000/${product.images[0]}`}
+              alt={product.name}
+              className="cart-item-image"
+            />
+            <div className="cart-item-info">
+              <h3>{product.name}</h3>
+              
+              <p>Price: ${product.price}</p>
+              <p>Quantity: {quantity}</p>
+              <p>Total: ${product.price * quantity}</p>
+              <button
+                onClick={() => removeFromCart(product._id)}
+                className="remove-cart-button"
+              >
+                Remove
+              </button>
+            </div>
           </div>
+        ))}
+        <div className="cart-footer">
+          <button onClick={() => navigate(-1)} className="back-button">
+            Back to shopping
+          </button>
+          <span className="total-price">Total: ${totalPrice.toFixed(2)}</span>
+          <button
+            className="checkout-button"
+            onClick={() => navigate("/checkout")}
+          >
+            Checkout
+          </button>
         </div>
-      ))}
-      <div className="cart-footer">
-        <button onClick={() => navigate(-1)} className="back-button">
-          Back to shopping
-        </button>
-        <span className="total-price">Total: ${totalPrice.toFixed(2)}</span>
-        <button
-          className="checkout-button"
-          onClick={() => navigate("/checkout")}
-        >
-          Checkout
-        </button>
       </div>
     </div>
   );
