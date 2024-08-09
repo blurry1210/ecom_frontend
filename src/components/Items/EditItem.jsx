@@ -23,7 +23,7 @@ const EditItem = () => {
     const fetchItem = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products/${productId}`
+          `http://localhost:3001/api/products/${productId}`
         );
         setItem(response.data);
         setLoading(false);
@@ -46,7 +46,7 @@ const EditItem = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.put(`http://localhost:5000/api/products/${productId}`, item, {
+      await axios.put(`http://localhost:3001/api/products/${productId}`, item, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +63,7 @@ const EditItem = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.delete(`http://localhost:5000/api/products/${productId}`, {
+      await axios.delete(`http://localhost:3001/api/products/${productId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

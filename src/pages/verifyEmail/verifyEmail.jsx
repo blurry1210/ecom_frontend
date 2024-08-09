@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const EmailVerify = () => {
+const VerifyEmail = () => {
   const { userId, token } = useParams();
   const navigate = useNavigate();
 
@@ -10,8 +10,8 @@ const EmailVerify = () => {
     const verifyEmail = async () => {
       try {
         console.log(`Attempting to verify email with userId: ${userId} and token: ${token}`);
-        const url = `http://localhost:5000/api/users/verify/${userId}/${token}`;
-        const response = await axios.post(url);
+        const url = `http://localhost:3000/api/auth/verify/${userId}/${token}`;
+        const response = await axios.get(url);
         console.log('Verification response:', response.data);
         navigate('/login', { replace: true });
       } catch (error) {
@@ -25,9 +25,9 @@ const EmailVerify = () => {
 
   return (
     <div>
-      <h1>Verifying your email...</h1>
+      <h2>Verifying your email...</h2>
     </div>
   );
 };
 
-export default EmailVerify;
+export default VerifyEmail;

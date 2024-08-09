@@ -18,7 +18,7 @@ import FavoritesPage from "./pages/Favorite/Favorite";
 import DistributorProfile from './pages/profile/DistributorProfile';
 import { FavoritesProvider } from './pages/Favorite/FavoritesContext';
 import { NotificationProvider } from './components/notifications/NotificationContext';
-import EmailVerify from './pages/verifyEmail/verifyEmail';
+import VerifyEmail from './pages/verifyEmail/verifyEmail';
 import "./index.css";
 import Product from './pages/products/Product';
 import EditItem from './components/Items/EditItem'; 
@@ -78,7 +78,7 @@ function App() {
                     <Route path="/checkout" element={<ProtectedRoute element={CheckoutForm} />} /> 
                     <Route path="/payment" element={<PaymentPage />} />
                     <Route path="/distributor/orders" element={<ProtectedRoute element={DistributorOrders} />} />
-                    <Route path="/verify/:userId/:token" element={<EmailVerify />} />
+                    <Route path="/verify/:userId/:token" element={<VerifyEmail />} />
                     <Route path="/product/:productId" element={<Product />} />
                     <Route path="/edit-item/:productId" element={<ProtectedRoute element={EditItem} />} /> 
                     <Route path="/login/forgot_password" element={<ForgotPassword />}/>

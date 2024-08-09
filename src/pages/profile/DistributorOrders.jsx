@@ -13,7 +13,7 @@ const DistributorOrders = ({ userId }) => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/orders/distributor/${userId}`,
+          `http://localhost:3000/api/users/${auth.user.id}`,
           {
             headers: { Authorization: `Bearer ${auth.token}` },
           }

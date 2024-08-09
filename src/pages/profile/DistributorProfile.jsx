@@ -17,9 +17,12 @@ const DistributorProfile = ({ userId }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/users/${userId}`
-        );
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`http://localhost:3000/api/auth/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log("Fetched user data:", response.data);
         setUser(response.data);
       } catch (error) {

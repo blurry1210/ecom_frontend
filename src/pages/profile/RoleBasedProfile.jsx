@@ -9,7 +9,6 @@ const RoleBasedProfile = () => {
   const { userId } = useParams();
   const navigate = useNavigate();
   const { auth } = useAuth();
-  console.log('UserId from params:', userId);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,12 +16,15 @@ const RoleBasedProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/${auth.user.id}`);
-        console.log('Fetched user data:', response.data);
+        const token = localStorage.getItem('token');
+        const response = await axios.get(
+          `http://localhost:3000/api/auth/${userId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         setUser(response.data);
       } catch (error) {
-        console.error('Error fetching user data:', error);
         setError('Error fetching user data');
+        console.error('Error fetching user data:', error);
       } finally {
         setLoading(false);
       }

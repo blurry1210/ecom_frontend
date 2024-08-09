@@ -138,7 +138,7 @@ const FilterComponent = ({ setProducts }) => {
     setError("");
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/products/filter",
+        "http://localhost:3001/api/products/filter",
         {
           params: {
             category: selectedCategory,

@@ -46,7 +46,7 @@ function CartPage() {
         {cartItems.map(({ product, quantity }) => (
           <div key={product._id} className="cart-item">
             <img
-              src={`http://localhost:5000/${product.images[0]}`}
+              src={`http://localhost:3001/${product.images[0]}`}
               alt={product.name}
               className="cart-item-image"
             />

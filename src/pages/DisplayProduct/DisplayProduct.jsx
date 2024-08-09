@@ -15,7 +15,7 @@ function DisplayProducts({ products, setProducts }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/products");
+        const response = await axios.get("http://localhost:3001/api/products");
         setProducts(response.data);
       } catch (error) {
         setError("Failed to fetch products");
@@ -56,11 +56,12 @@ function DisplayProducts({ products, setProducts }) {
         <div key={product._id} className="product-card">
           <Link to={`/product/${product._id}`}>
             <img
-              src={`http://localhost:5000/${product.images[0]}`}
+              src={`http://localhost:3001/${product.images[0]}`}
               alt={product.name}
             />
             <h2>{product.name}</h2>
           </Link>
+          <p className="category"> {product.category}</p>
           <p className="price">${product.price}</p>
           <div className="buttons">
             <button onClick={() => handleAddToCart(product)}>Add to Cart</button>

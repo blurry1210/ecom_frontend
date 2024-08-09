@@ -27,7 +27,7 @@ const Register = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    const { password, confirmPassword } = user;
+    const { password, confirmPassword, ...userData } = user;
 
     if (password !== confirmPassword) {
       setError("Passwords do not match!");
@@ -35,8 +35,8 @@ const Register = () => {
     }
 
     try {
-      console.log('Registering user:', user);
-      const response = await axios.post('http://localhost:5000/api/users', user);
+      console.log('Registering user:', userData);
+      const response = await axios.post('http://localhost:3000/api/auth/register', { ...userData, password });
       console.log('User created:', response.data);
       setSuccess('Registration successful! Please check your email to verify your account.');
       setError('');
@@ -48,7 +48,6 @@ const Register = () => {
 
   return (
     <div>
-
       <div className="register-container">
         <div className="card">
           <div className="card-body">

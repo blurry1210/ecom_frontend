@@ -19,7 +19,7 @@ function ProductDetails() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/products/${productId}`);
+        const response = await axios.get(`http://localhost:3001/api/products/${productId}`);
         setProduct(response.data);
         setReviews(response.data.reviews || []);
       } catch (err) {
@@ -63,7 +63,7 @@ function ProductDetails() {
         return;
       }
 
-      const response = await axios.post(`http://localhost:5000/api/products/${productId}/reviews`, review, {
+      const response = await axios.post(`http://localhost:3001/api/products/${productId}/reviews`, review, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -91,7 +91,7 @@ function ProductDetails() {
     <div className="product-details">
       <div className="product-details-container">
         <div className="product-image">
-          <img src={`http://localhost:5000/${product.images[0]}`} alt={product.name} />
+          <img src={`http://localhost:3001/${product.images[0]}`} alt={product.name} />
         </div>
         <div className="product-info">
           <h1 className="product-name">{product.name}</h1>

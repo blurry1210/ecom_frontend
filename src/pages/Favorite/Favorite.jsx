@@ -1,17 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useCart } from "../Cart/CartContext";
 import { useFavorites } from "../Favorite/FavoritesContext";
-import TopBar from "../../components/TopBar/TopBar";
 import ProfileMenu from "../../components/profilemenu/ProfileMenu"; // Import the ProfileMenu
 import "./Favorite.css";
 
-function FavoritesPage({ products = [] }) {
+function FavoritesPage() {
   const { addToCart } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
   const navigate = useNavigate();
   const location = useLocation();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const isSpecialPage =
     location.pathname.startsWith("/profile") ||
@@ -21,14 +23,23 @@ function FavoritesPage({ products = [] }) {
   const pageStyles = isSpecialPage ? { boxSizing: "border-box" } : {};
 
   useEffect(() => {
-    console.log("Favorites:", favorites);
-    console.log("Products:", products);
-  }, [favorites, products]);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3001/api/products");
+        setProducts(response.data);
+      } catch (error) {
+        setError("Failed to fetch products");
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const favoriteProducts = products.filter((product) => {
-    const isFavorite = favorites.includes(product._id);
-    console.log(`Product ${product._id} is favorite:`, isFavorite);
-    return isFavorite;
+    return favorites.includes(product._id);
   });
 
   const handleAddToCart = (product) => {
@@ -40,12 +51,14 @@ function FavoritesPage({ products = [] }) {
     navigate(-1);
   };
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
   if (favoriteProducts.length === 0) {
     return (
       <div>
-        <TopBar />
         <div className="favorites-page-container" style={pageStyles}>
-          <ProfileMenu /> {/* Place ProfileMenu here */}
+          <ProfileMenu />
           <div className="container-favorite">
             <p className="mesaj-niciun-favorit">Nu ați adăugat niciun favorit.</p>
             <button
@@ -63,20 +76,22 @@ function FavoritesPage({ products = [] }) {
   return (
     <div>
       <div className="favorites-page-container" style={pageStyles}>
-        <ProfileMenu /> {/* Place ProfileMenu here */}
+        <ProfileMenu />
         <div className="container-favorite">
           <h2 className="text-favorite">Favoritele tale</h2>
           <div className="grid-produse">
             {favoriteProducts.map((product) => (
               <div key={product._id} className="card-produs">
                 <img
-                  src={`http://localhost:5000/${product.images[0]}`}
+                  src={`http://localhost:3001/${product.images[0]}`}
                   alt={product.name}
                 />
                 <h2>{product.name}</h2>
                 <p className="pret">${product.price}</p>
                 <div className="buttons-container">
-                  <button onClick={() => handleAddToCart(product)}>Adaugă în coș</button>
+                  <button onClick={() => handleAddToCart(product)}>
+                    Adaugă în coș
+                  </button>
                   <button
                     onClick={() => toggleFavorite(product._id)}
                     className="buton-elimina-favorit"
@@ -98,9 +113,5 @@ function FavoritesPage({ products = [] }) {
     </div>
   );
 }
-
-FavoritesPage.propTypes = {
-  products: PropTypes.array.isRequired,
-};
 
 export default FavoritesPage;

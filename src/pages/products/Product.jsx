@@ -24,7 +24,7 @@ function Product() {
       try {
         console.log(`Fetching product with ID: ${productId}`);
         const response = await axios.get(
-          `http://localhost:5000/api/products/${productId}`
+          `http://localhost:3001/api/products/${productId}`
         );
         console.log("Product data fetched:", response.data);
         setProduct(response.data);
@@ -72,7 +72,7 @@ function Product() {
       }
 
       const response = await axios.post(
-        `http://localhost:5000/api/products/${productId}/reviews`,
+        `http://localhost:3001/api/products/${productId}/reviews`,
         review,
         {
           headers: {
@@ -104,7 +104,7 @@ function Product() {
         <div className="product-content">
           <div className="product-image">
             <img
-              src={`http://localhost:5000/${product.images[0]}`}
+              src={`http://localhost:3001/${product.images[0]}`}
               alt={product.name}
             />
           </div>
