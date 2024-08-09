@@ -64,7 +64,7 @@ const CheckoutForm = () => {
 
       console.log('Order data being sent:', orderData);
 
-      await axios.post('http://localhost:5000/api/orders', orderData, {
+      await axios.post('http://localhost:3002/api/orders', orderData, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -88,9 +88,7 @@ const CheckoutForm = () => {
 
   return (
     <div>
-      <TopBar />
       <div className="container-checkout-form">
-        <Navbar />
         <form className="checkout-form" onSubmit={handleSubmit}>
           <h2>Checkout</h2>
           <input name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First Name" required />

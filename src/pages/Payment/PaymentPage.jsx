@@ -92,7 +92,7 @@ const PaymentPage = () => {
   useEffect(() => {
     const fetchPaymentIntent = async () => {
       try {
-        const response = await axios.post('http://localhost:5000/api/payments/create-payment-intent', { amount });
+        const response = await axios.post('http://localhost:3004/api/payments/create-payment-intent', { amount });
         setClientSecret(response.data.clientSecret);
       } catch (error) {
         console.error('Error fetching payment intent:', error);

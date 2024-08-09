@@ -39,7 +39,7 @@ const Stats = ({ userId }) => {
         }
 
         console.log(`Fetching stats for distributor with ID: ${userId}`);
-        const response = await axios.get(`http://localhost:5000/api/stats/distributor/${userId}`, {
+        const response = await axios.get(`http://localhost:3003/api/stats/distributor/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`, // Correctly formatted Authorization header
           },
@@ -48,7 +48,7 @@ const Stats = ({ userId }) => {
         setStats(response.data);
 
         // Fetch order statuses
-        const statusesResponse = await axios.get(`http://localhost:5000/api/stats/distributor/${userId}/statuses`, {
+        const statusesResponse = await axios.get(`http://localhost:3003/api/stats/distributor/${userId}/statuses`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

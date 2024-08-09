@@ -18,15 +18,22 @@ const OrderDetails = () => {
           setLoading(false);
           return;
         }
-        const response = await axios.get(`http://localhost:5000/api/orders/${orderId}`, {
+        
+        // Logging to ensure correct token and URL
+        console.log('Fetching order with ID:', orderId);
+        console.log('Using token:', token);
+
+        const response = await axios.get(`http://localhost:3002/api/orders/${orderId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
+        console.log('Order response data:', response.data);
+        
         const orderData = response.data;
 
-        
+        // Check if the order has items and products
         const itemsWithProduct = orderData.items.filter(item => {
           if (!item.product || !item.product._id) {
             console.error('Product ID is missing for item:', item);
@@ -73,7 +80,7 @@ const OrderDetails = () => {
         {order.items.map(item => (
           <div key={item.product._id} className="order-item">
             {item.product && item.product.images && item.product.images[0] ? (
-              <img src={`http://localhost:5000/${item.product.images[0]}`} alt={item.product.name} />
+              <img src={`http://localhost:3001/${item.product.images[0]}`} alt={item.product.name} />
             ) : (
               <p>No Image Available</p>
             )}

@@ -12,7 +12,7 @@ const Orders = ({ userId }) => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/orders/user/${userId}`, {
+        const response = await axios.get(`http://localhost:3002/api/orders/user/${userId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
         setOrders(response.data);
@@ -49,7 +49,7 @@ const Orders = ({ userId }) => {
             <div className="order-items-preview">
               {order.items.slice(0, 3).map(item => (
                 item.product && item.product.images && item.product.images[0] ? (
-                  <img key={item.productId} src={`http://localhost:5000/${item.product.images[0]}`} alt={item.product.name} />
+                  <img key={item.productId} src={`http://localhost:3001/${item.product.images[0]}`} alt={item.product.name} />
                 ) : (
                   <p key={item.productId}>No Image Available</p>
                 )

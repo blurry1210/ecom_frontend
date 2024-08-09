@@ -18,7 +18,7 @@ const OrderList = ({ userId }) => {
           return;
         }
 
-        const response = await axios.get(`http://localhost:5000/api/orders/user/${userId}`, {
+        const response = await axios.get(`http://localhost:3002/api/orders/user/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -29,7 +29,7 @@ const OrderList = ({ userId }) => {
         // Fetch product details for each item in the orders
         const productRequests = ordersData.map(order =>
           Promise.all(order.items.map(item =>
-            axios.get(`http://localhost:5000/api/products/${item.productId}`, {
+            axios.get(`http://localhost:3001/api/products/${item.product}`, {
               headers: {
                 Authorization: `Bearer ${token}`
               }
@@ -48,7 +48,7 @@ const OrderList = ({ userId }) => {
         }));
 
         setOrders(ordersWithProductData);
-        console.log('Orders fetched:', ordersWithProductData); 
+        console.log('Orders fetched:', ordersWithProductData);
       } catch (error) {
         setError('Failed to fetch orders');
         console.error('Error fetching orders:', error.response ? error.response.data : error.message); // Improved error logging
@@ -78,7 +78,7 @@ const OrderList = ({ userId }) => {
             </div>
             <div className="order-items-images">
               {order.items.map(item => (
-                <img key={item.productId} src={`http://localhost:5000/${item.product.images[0]}`} alt={item.product.name} />
+                <img key={item.product._id} src={`http://localhost:3001/${item.product.images[0]}`} alt={item.product.name} />
               ))}
             </div>
           </Link>

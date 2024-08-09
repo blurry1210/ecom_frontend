@@ -13,7 +13,7 @@ const DistributorOrders = ({ userId }) => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/users/${auth.user.id}`,
+          `http://localhost:3002/api/orders/distributor/${auth.user.id}`, // Correct endpoint for fetching distributor orders
           {
             headers: { Authorization: `Bearer ${auth.token}` },
           }
@@ -28,12 +28,12 @@ const DistributorOrders = ({ userId }) => {
     };
 
     fetchOrders();
-  }, [userId, auth.token]);
+  }, [auth.user.id, auth.token]);
 
   const handleStatusUpdate = async (orderId, itemId, newStatus) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/orders/${orderId}/items/${itemId}/status`,
+        `http://localhost:3002/api/orders/${orderId}/items/${itemId}/status`,
         { status: newStatus },
         {
           headers: { Authorization: `Bearer ${auth.token}` },
