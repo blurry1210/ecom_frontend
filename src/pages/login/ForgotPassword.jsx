@@ -19,7 +19,7 @@ const ForgotPasswordComponent = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/api/forgot-password", { email });
+      await axios.post("http://localhost:3000/api/auth/forgot-password", { email });
       navigate("/login");
       showNotification("An email was sent!", "success");
     } catch (error) {
