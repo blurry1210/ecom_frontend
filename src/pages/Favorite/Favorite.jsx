@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCart } from "../Cart/CartContext";
 import { useFavorites } from "../Favorite/FavoritesContext";
-import ProfileMenu from "../../components/profilemenu/ProfileMenu"; // Import the ProfileMenu
+import ProfileMenu from "../../components/profilemenu/ProfileMenu"; 
 import "./Favorite.css";
 
 function FavoritesPage() {

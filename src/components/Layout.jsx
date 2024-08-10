@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
 
   return (
     <div style={layoutStyles}>
-      <Header /> {/* Using Header component */}
+      <Header /> 
       {children}
     </div>
   );

@@ -17,13 +17,13 @@ const ResetPasswordComponent = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post(
         `http://localhost:3000/api/auth/reset-password/${userId}/${token}`,
         { password }
       );
-  
+
       if (response.status === 200) {
         navigate("/login");
         showNotification("Password has been reset successfully!", "success");
@@ -35,27 +35,30 @@ const ResetPasswordComponent = () => {
       showNotification("Error resetting password", "error");
     }
   };
-  
 
   return (
     <div className="stilreset">
-      <p className="resetmessage">Enter your new password</p>
-      <form
-        className="stilform"
-        action="#"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="password"
-          value={password}
-          onChange={handleChange}
-          className="passwordinput"
-          placeholder="New Password"
-          required
-        />
-        <Button type="submit">Reset Password</Button>
-      </form>
+      <div className="card">
+        <div className="card-body">
+          <p className="resetmessage">Enter your new password</p>
+          <form
+            className="stilform"
+            action="#"
+            autoComplete="off"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="password"
+              value={password}
+              onChange={handleChange}
+              className="passwordinput"
+              placeholder="New Password"
+              required
+            />
+            <Button type="submit">Reset Password</Button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };

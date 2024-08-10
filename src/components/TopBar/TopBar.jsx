@@ -5,7 +5,7 @@ import Button from "../button/Button";
 import SearchBar from "../SearchBar/SearchBar";
 import { useAuth } from "../../pages/login/AuthContext";
 import { useNotification } from "../notifications/NotificationContext";
-import "./TopBar.css"; // Custom styles
+import "./TopBar.css";
 
 const TopBar = ({ setProducts }) => {
   const { auth, setAuth } = useAuth();
@@ -29,22 +29,22 @@ const TopBar = ({ setProducts }) => {
 
   return (
     <nav className="top-bar navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <SearchBar setProducts={setProducts} />
-        <Link to="/products" className="navbar-brand">
-          TechHub
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarTopBar"
-          aria-controls="navbarTopBar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+  <div className="container-fluid">
+    <SearchBar setProducts={setProducts} />
+    <Link to="/products" className="navbar-brand">
+      TechHub
+    </Link>
+    <button
+      className="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTopBar"
+      aria-controls="navbarTopBar"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span className="navbar-toggler-icon"></span>
+    </button>
         <div className="collapse navbar-collapse" id="navbarTopBar">
           <ul className="navbar-nav ms-auto">
             {auth.isLoggedIn && auth.user ? (
@@ -59,7 +59,10 @@ const TopBar = ({ setProducts }) => {
                 >
                   My Account
                 </a>
-                <ul className="dropdown-menu high-zindex-dropdown-menu" aria-labelledby="navbarDropdownAccount">
+                <ul
+                  className="dropdown-menu high-zindex-dropdown-menu"
+                  aria-labelledby="navbarDropdownAccount"
+                >
                   <li>
                     <Link to={`/profile/${auth.user.id}`} className="dropdown-item">
                       View Profile

@@ -11,12 +11,12 @@ const ListedItems = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const token = localStorage.getItem("token"); // Get the token from localStorage
+        const token = localStorage.getItem("token"); 
         const response = await axios.get(
           `http://localhost:3001/api/products/distributor-products`, 
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the request headers
+              Authorization: `Bearer ${token}`, 
             },
           }
         );

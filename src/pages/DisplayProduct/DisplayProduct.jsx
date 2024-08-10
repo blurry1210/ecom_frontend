@@ -10,6 +10,9 @@ function DisplayProducts({ products, setProducts }) {
   const { addToCart } = useCart();
   const { favorites, toggleFavorite } = useFavorites();
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const PRODUCTS_PER_PAGE = 20;
   const showNotification = useNotification();
 
   useEffect(() => {
@@ -17,6 +20,7 @@ function DisplayProducts({ products, setProducts }) {
       try {
         const response = await axios.get("http://localhost:3001/api/products");
         setProducts(response.data);
+        setTotalPages(Math.ceil(response.data.length / PRODUCTS_PER_PAGE));
       } catch (error) {
         setError("Failed to fetch products");
         console.error("Error:", error);
@@ -27,6 +31,10 @@ function DisplayProducts({ products, setProducts }) {
   }, [setProducts]);
 
   const handleAddToCart = (product) => {
+    if (product.quantity === 0) {
+      showNotification("This product is out of stock!", "error");
+      return;
+    }
     addToCart(product);
     showNotification("Item added to cart!", "success");
   };
@@ -40,6 +48,15 @@ function DisplayProducts({ products, setProducts }) {
     );
   };
 
+  const handlePageChange = (direction) => {
+    if (direction === "next" && currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    } else if (direction === "prev" && currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+    window.scrollTo(0, 0); 
+  };
+
   if (error) {
     return <p>Error loading products: {error}</p>;
   }
@@ -50,29 +67,60 @@ function DisplayProducts({ products, setProducts }) {
     );
   }
 
+  const indexOfLastProduct = currentPage * PRODUCTS_PER_PAGE;
+  const indexOfFirstProduct = indexOfLastProduct - PRODUCTS_PER_PAGE;
+  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
   return (
-    <div className="products-container">
-      {products.map((product) => (
-        <div key={product._id} className="product-card">
-          <Link to={`/product/${product._id}`}>
-            <img
-              src={`http://localhost:3001/${product.images[0]}`}
-              alt={product.name}
-            />
-            <h2>{product.name}</h2>
-          </Link>
-          <p className="category"> {product.category}</p>
-          <p className="price">${product.price}</p>
-          <div className="buttons">
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            <span
-              onClick={() => handleToggleFavorite(product)}
-              className={`favorite-icon fa fa-heart ${favorites.includes(product._id) ? 'active' : ''}`}
-            ></span>
+    <>
+      <div className="products-container">
+        {currentProducts.map((product) => (
+          <div key={product._id} className="product-card">
+            <Link to={`/product/${product._id}`}>
+              <img
+                src={`http://localhost:3001/${product.images[0]}`}
+                alt={product.name}
+              />
+              <h2>{product.name}</h2>
+            </Link>
+            <p className="category"> {product.category}</p>
+            <p className="price">${product.price}</p>
+            <div className="buttons">
+              <button 
+                onClick={() => handleAddToCart(product)}
+                disabled={product.quantity === 0} 
+                style={{
+                  backgroundColor: product.quantity === 0 ? '#ccc' : '#007bff', 
+                  cursor: product.quantity === 0 ? 'not-allowed' : 'pointer'
+                }}
+              >
+                {product.quantity === 0 ? 'Out of Stock' : 'Add to Cart'}
+              </button>
+              <span
+                onClick={() => handleToggleFavorite(product)}
+                className={`favorite-icon fa fa-heart ${favorites.includes(product._id) ? 'active' : ''}`}
+              ></span>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <div className="pagination-buttons">
+        <button
+          className="pagePrevButton"
+          onClick={() => handlePageChange("prev")}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button
+          className="pageNextButton"
+          onClick={() => handlePageChange("next")}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
+    </>
   );
 }
 

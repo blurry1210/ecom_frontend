@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, Routes, Route, useParams } from 'react-router-dom';
-import OrderDetails from './OrderDetails';
+import { useNavigate } from 'react-router-dom';
 import './Orders.less';
 
 const Orders = ({ userId }) => {
   const [orders, setOrders] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [ordersPerPage] = useState(10); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -32,6 +34,12 @@ const Orders = ({ userId }) => {
     }
   }, [userId]);
 
+  const indexOfLastOrder = currentPage * ordersPerPage;
+  const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
+  const currentOrders = orders.slice(indexOfFirstOrder, indexOfLastOrder);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -39,8 +47,12 @@ const Orders = ({ userId }) => {
     <div className="orders-container">
       <h2>Your Orders</h2>
       <div className="orders-list">
-        {orders.map(order => (
-          <Link to={`${order._id}`} key={order._id} className="order-card">
+        {currentOrders.map(order => (
+          <div
+            key={order._id}
+            className="order-card"
+            onClick={() => navigate(`/orders/${order._id}`)} 
+          >
             <div className="order-info">
               <p><strong>Order ID:</strong> {order._id}</p>
               <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
@@ -50,17 +62,23 @@ const Orders = ({ userId }) => {
               {order.items.slice(0, 3).map(item => (
                 item.product && item.product.images && item.product.images[0] ? (
                   <img key={item.productId} src={`http://localhost:3001/${item.product.images[0]}`} alt={item.product.name} />
-                ) : (
-                  <p key={item.productId}>No Image Available</p>
-                )
+                ) : null
               ))}
             </div>
-          </Link>
+          </div>
         ))}
       </div>
-      <Routes>
-        <Route path=":orderId" element={<OrderDetails />} />
-      </Routes>
+      <div className="pagination-container">
+        {Array.from({ length: Math.ceil(orders.length / ordersPerPage) }, (_, index) => (
+          <button
+            key={index + 1}
+            onClick={() => paginate(index + 1)}
+            className={`page-number ${index + 1 === currentPage ? 'active' : ''}`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

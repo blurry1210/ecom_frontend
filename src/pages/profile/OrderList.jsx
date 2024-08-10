@@ -26,7 +26,6 @@ const OrderList = ({ userId }) => {
 
         const ordersData = response.data;
 
-        // Fetch product details for each item in the orders
         const productRequests = ordersData.map(order =>
           Promise.all(order.items.map(item =>
             axios.get(`http://localhost:3001/api/products/${item.product}`, {
@@ -51,7 +50,7 @@ const OrderList = ({ userId }) => {
         console.log('Orders fetched:', ordersWithProductData);
       } catch (error) {
         setError('Failed to fetch orders');
-        console.error('Error fetching orders:', error.response ? error.response.data : error.message); // Improved error logging
+        console.error('Error fetching orders:', error.response ? error.response.data : error.message); 
       } finally {
         setLoading(false);
       }

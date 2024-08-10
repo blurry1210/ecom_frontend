@@ -24,23 +24,24 @@ const ForgotPasswordComponent = () => {
       showNotification("An email was sent!", "success");
     } catch (error) {
       console.error("There was an error submitting the form:", error);
-      // Handle error (show notification, etc.)
       showNotification("Failed to send email", "error");
     }
   };
 
   return (
-    <div className="stilforgot">
-      <p className="recoverymessage">Email for password recovery</p>
-      <form
-        className="stilform"
-        action="#"
-        autoComplete="off"
-        onSubmit={handleSubmit}
-      >
-        <EmailInput value={email} handleChange={handleChange} />
-        <Button type="submit">Submit</Button>
-      </form>
+    <div className="forgot-password-page">
+      <div className="stilforgot">
+        <p className="recoverymessage">Email for password recovery</p>
+        <form
+          className="stilform"
+          action="#"
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <EmailInput value={email} handleChange={handleChange} />
+          <Button type="submit">Submit</Button>
+        </form>
+      </div>
     </div>
   );
 };

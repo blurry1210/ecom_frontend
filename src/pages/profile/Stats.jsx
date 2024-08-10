@@ -32,7 +32,7 @@ const Stats = ({ userId }) => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const token = localStorage.getItem('token'); // Retrieve token from local storage
+        const token = localStorage.getItem('token'); 
         if (!token) {
           setError('No token found, authorization denied.');
           return;
@@ -41,13 +41,12 @@ const Stats = ({ userId }) => {
         console.log(`Fetching stats for distributor with ID: ${userId}`);
         const response = await axios.get(`http://localhost:3003/api/stats/distributor/${userId}`, {
           headers: {
-            Authorization: `Bearer ${token}`, // Correctly formatted Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         });
         console.log('Stats data fetched:', response.data);
         setStats(response.data);
 
-        // Fetch order statuses
         const statusesResponse = await axios.get(`http://localhost:3003/api/stats/distributor/${userId}/statuses`, {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -75,7 +74,7 @@ const Stats = ({ userId }) => {
     datasets: [
       {
         label: 'Distributor Stats',
-        data: [stats.totalOrders, stats.totalProducts, stats.totalSales || 0], // Ensure totalSales is not null
+        data: [stats.totalOrders, stats.totalProducts, stats.totalSales || 0], 
         backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)'],
       },
     ],

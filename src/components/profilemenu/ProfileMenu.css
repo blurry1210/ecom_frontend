@@ -1,7 +1,7 @@
 .menu {
-    width: 100%; /* Set the width of the menu */
-    background-color: #333333; /* Dark background for contrast */
-    color: #fbfbfb; /* Light text color for contrast */
+    width: 100%; 
+    background-color: #333333; 
+    color: #fbfbfb; 
     padding: 20px;
     height: 100%;
     overflow-y: auto;
@@ -18,7 +18,7 @@
       cursor: pointer;
   
       &:hover {
-        background-color: #444444; /* Darken on hover */
+        background-color: #444444; 
       }
   
       a {
@@ -28,7 +28,7 @@
     }
   
     .active {
-      background-color: #007bff; /* Highlight active link */
+      background-color: #007bff; 
     }
   }
   

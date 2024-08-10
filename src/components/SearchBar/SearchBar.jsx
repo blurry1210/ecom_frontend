@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SearchBar.less'; // Use CSS or ensure .less is correctly compiled
+import './SearchBar.less'; 
 import axios from 'axios';
 
 const SearchBar = ({ setProducts }) => {
@@ -13,21 +13,21 @@ const SearchBar = ({ setProducts }) => {
         try {
             let response;
             if (newQuery.trim() === '') {
-                // Fetch all products if the query is empty
+                
                 response = await axios.get('http://localhost:5000/api/products');
             } else {
-                // Fetch filtered products based on the query
+                
                 response = await axios.get('http://localhost:5000/api/products/search', {
                     params: { query: newQuery },
                 });
             }
 
             setProducts(response.data);
-            setError(null); // Clear error if successful
+            setError(null); 
         } catch (err) {
             console.error('Error fetching products:', err);
             setError('Failed to fetch products. Please try again later.');
-            setProducts([]); // Clear products on error
+            setProducts([]);
         }
     };
 

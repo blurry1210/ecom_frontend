@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useCart } from '../Cart/CartContext';
 import { useNotification } from '../../components/notifications/NotificationContext';
 import axios from 'axios';
-import Navbar from '../../components/navbar/Navbar';
-import TopBar from '../../components/TopBar/TopBar';
 import './CheckoutForm.css';
 
 const CheckoutForm = () => {

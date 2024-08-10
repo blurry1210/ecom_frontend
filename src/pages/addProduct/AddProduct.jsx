@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../login/AuthContext";
-import TopBar from "../../components/TopBar/TopBar"; // Include TopBar
-import Navbar from "../../components/navbar/Navbar"; // Include Navbar
 import "./AddProduct.css";
 
 const categories = {

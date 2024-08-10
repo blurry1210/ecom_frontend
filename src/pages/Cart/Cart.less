@@ -15,7 +15,6 @@
 @COLOR10: #60b347;
 @COLOR11: #4ca1af;
 
-/* Container for the entire cart page */
 .cart-page-container {
   display: flex;
   flex-direction: row;
@@ -27,16 +26,15 @@
   font-family: "Quicksand", sans-serif;
 }
 
-/* Container for the cart */
 .cart-container {
   background-color: @WHITE;
   border-radius: 8px;
   padding: 20px;
   margin: 70px auto;
-  max-width: 1000px; /* Increased width for the cart container */
+  max-width: 1000px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   align-items: center;
-  flex-grow: 1; /* Allow the cart container to grow */
+  flex-grow: 1; 
 }
 
 h2 {
@@ -115,6 +113,7 @@ h2 {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+    width:250px;
 
     &:hover {
       background-color: #d9363e;
@@ -145,6 +144,7 @@ h2 {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  width:250px;
 
   &:hover {
     background-color: #45a049;
@@ -181,9 +181,8 @@ h2 {
   }
 }
 
-/* Profile menu */
 .menu {
-  width: 250px; /* Reduced width for the profile menu */
+  width: 250px; 
   background-color: @BLACK;
   color: @WHITE;
   padding: 20px;

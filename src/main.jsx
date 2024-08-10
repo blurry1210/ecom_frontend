@@ -11,11 +11,9 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import ItemList from './components/Items/ItemList';
 import ItemForm from './components/Items/ItemForm';
-import Profile from './pages/profile/Profile';
 import AddProduct from "./pages/addProduct/AddProduct";
 import CartPage from './pages/Cart/Cart';
 import FavoritesPage from "./pages/Favorite/Favorite";
-import DistributorProfile from './pages/profile/DistributorProfile';
 import { FavoritesProvider } from './pages/Favorite/FavoritesContext';
 import { NotificationProvider } from './components/notifications/NotificationContext';
 import VerifyEmail from './pages/verifyEmail/verifyEmail';
@@ -29,9 +27,8 @@ import RoleBasedProfile from './pages/profile/RoleBasedProfile';
 import Admin from "./pages/admin/Admin";
 import ForgotPassword from "./pages/login/ForgotPassword";
 import ResetPassword from "./pages/login/ResetPassword";
-
-import TopBar from './components/TopBar/TopBar';
-import Navbar from './components/navbar/Navbar';
+import OrderDetails from "./pages/profile/OrderDetails";
+import Orders from "./pages/profile/Orders";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rootElement = document.getElementById("root");
@@ -85,6 +82,8 @@ function App() {
                     <Route path="/edit-item/:productId" element={<ProtectedRoute element={EditItem} />} /> 
                     <Route path="/login/forgot_password" element={<ForgotPassword />}/>
                     <Route path="/reset-password/:userId/:token" element={<ResetPassword />} />
+                    <Route path="/orders/:orderId" element={<OrderDetails />} />
+                    <Route path="/orders" element={<Orders />} />
                     <Route path="/admin/*" element={<Admin />} />
                     <Route path="*" element={<div>404 Not Found</div>} />
                   </Routes>

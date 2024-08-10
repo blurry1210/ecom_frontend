@@ -4,8 +4,6 @@ import { Link, Routes, Route, useLocation } from "react-router-dom";
 import ListedItems from "./ListedItems";
 import DistributorOrders from "./DistributorOrders";
 import Stats from "./Stats";
-import TopBar from "../../components/TopBar/TopBar"; // Include TopBar
-import Navbar from "../../components/navbar/Navbar"; // Include Navbar
 import "./DistributorProfile.css";
 
 const DistributorProfile = ({ userId }) => {
@@ -90,7 +88,6 @@ const DistributorProfile = ({ userId }) => {
             />
             <Route path="stats" element={<Stats userId={userId} />} />
             <Route path="/" element={<ListedItems userId={userId} />} />{" "}
-            {/* Default Route */}
           </Routes>
         </div>
       </div>

@@ -3,13 +3,13 @@
 .products-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 15px; /* Set gap to 15px for consistent spacing */
+  gap: 10px !important; 
   padding: 20px;
 }
 
 .product-card {
-  background-color: #333; /* Darker background */
-  color: #fff; /* White font color */
+  background-color: #333;
+  color: #fff;
   padding: 20px;
   border-radius: 8px;
   position: relative;
@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 270px; /* Smaller width */
-  height: 450px; /* Smaller height */
+  width: 270px;
+  height: 450px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -31,39 +31,39 @@
 .product-card img {
   width: 100%;
   height: auto;
-  max-height: 160px; /* Smaller image */
+  max-height: 160px;
   object-fit: contain;
   margin-bottom: 10px;
 }
 
 .product-card h2 {
-  font-size: 1.5rem; /* Smaller font size */
+  font-size: 1.5rem;
   margin: 0 0 10px;
-  color: #fff; /* Set the product title color to white */
+  color: #fff;
 }
 
 .product-card .price {
-  font-size: 1.2rem; /* Price font size */
-  color: #007bff; /* Color of the price */
+  font-size: 1.2rem;
+  color: #007bff;
   margin: 0 0 20px;
 }
 
 .product-card .buttons {
   display: flex;
-  justify-content: center; /* Center the button */
+  justify-content: center;
   align-items: center;
   margin-top: 10px;
 }
 
 .product-card button {
   background-color: #007bff;
-  color: #fff !important; /* Ensure white font color */
+  color: #fff !important;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s;
-  font-size: 1rem; /* Ensure the text size is readable */
+  font-size: 1rem;
 }
 
 .product-card button:hover {
@@ -73,7 +73,7 @@
 .favorite-icon {
   font-size: 1.5em;
   cursor: pointer;
-  color: #ddd; /* Default heart color */
+  color: #ddd;
   transition: color 0.2s;
   position: absolute;
   top: 10px;
@@ -81,9 +81,39 @@
 }
 
 .favorite-icon.active {
-  color: red; /* Red color when active */
+  color: red;
 }
 
 .favorite-icon:hover {
   color: #ff6666;
+}
+
+.pagination-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.pagePrevButton,
+.pageNextButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pagePrevButton:hover,
+.pageNextButton:hover {
+  background-color: #0056b3;
+}
+
+.pagePrevButton:disabled,
+.pageNextButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }

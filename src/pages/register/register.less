@@ -1,32 +1,37 @@
-.register-container {
-  padding-top:100px !important;
-  padding-bottom:100px !important;
+.register-page {
+  background: url('/src/picture2.jpg') no-repeat center center fixed; 
+  background-size: cover; 
   display: flex;
-  justify-content: center; /* Center the card horizontally */
-  align-items: center; /* Center the card vertically */
-  min-height: 100vh; /* Full viewport height for vertical centering */
-  background: url('/ecom/ecom_backend/src/uploads/backpic.jpg') no-repeat center center fixed; /* Ensure background covers the entire container */
-  background-size: cover; /* Cover the entire container */
-  padding: 20px; /* Add some padding for small screen adjustments */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
+}
+
+.register-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+  padding: 20px; 
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark background */
+  background-color: rgba(0, 0, 0, 0.7) !important; 
   border: none;
-  border-radius: 8px; /* Rounded corners for a polished look */
+  border-radius: 8px; 
   width: 100%;
-  max-width: 600px !important; /* Maximum width for the card */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  max-width: 600px !important; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
 }
 
 .card-body {
-  padding: 30px; /* Internal padding for content spacing */
+  padding: 30px; 
 }
 
 .card-body h2 {
-  color: #fff; /* White text color */
+  color: #fff; 
   margin-bottom: 20px;
-  text-align: center; /* Centered heading text */
+  text-align: center; 
 }
 
 .form-group {
@@ -34,19 +39,19 @@
 }
 
 .form-group label {
-  color: #fff; /* White label text */
+  color: #fff; 
 }
 
 .form-control {
-  border: 1px solid #ccc; /* Subtle border for inputs */
+  border: 1px solid #ccc; 
   border-radius: 4px;
   padding: 10px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for input depth */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .form-control:focus {
-  border-color: #007bff; /* Blue border on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow on focus */
+  border-color: #007bff; 
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
 }
 
 .btn-primary {
@@ -54,7 +59,7 @@
   border-color: #007bff;
   padding: 10px;
   border-radius: 4px;
-  width: 100%; /* Full-width button inside the card */
+  width: 100%; 
 }
 
 .btn-primary:hover {
@@ -67,16 +72,16 @@
 }
 
 .text-center a {
-  color: #007bff; /* Link color */
+  color: #007bff; 
 }
 
 .text-center a:hover {
-  color: #0056b3; /* Link hover color */
+  color: #0056b3; 
   text-decoration: underline;
 }
 
 @media (max-width: 991px) {
   .register-container {
-    padding: 20px; /* Adjust padding for mobile views */
+    padding: 20px; 
   }
 }

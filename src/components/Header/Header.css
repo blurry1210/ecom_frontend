@@ -4,9 +4,8 @@
   width: 100%;
 }
 
-/* Ensure the navbar does not overlap with the top bar */
 .navbar-custom {
-  margin-top: 65px !important; /* Adjust this value based on the height of the TopBar */
+  margin-top: 65px !important; 
 }
 
 @media (max-width: 991px) {

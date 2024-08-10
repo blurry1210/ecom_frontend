@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Navbar.css'; // Custom styles for specific design elements
+import './Navbar.css'; 
 
 const Navbar = () => {
   return (

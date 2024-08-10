@@ -65,12 +65,10 @@ body {
   }
 }
 
-/* Ensuring the dropdown menu is on top */
 .nav-item .dropdown-menu {
   z-index: 9999;
 }
 
-/* Responsive adjustments */
 @media (max-width: 991px) {
   .navbar {
     background-color: transparent;
@@ -81,10 +79,10 @@ body {
   }
 
   .menu {
-    display: none; /* Hide the side menu on smaller screens */
+    display: none; 
   }
 
   .profile-container {
-    flex-direction: column; /* Stack the content vertically on smaller screens */
+    flex-direction: column;
   }
 }

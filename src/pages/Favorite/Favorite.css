@@ -14,7 +14,7 @@ body {
 .favorites-page-container {
   margin-left:50px !important;
   display: flex;
-  flex-direction: row; /* Aligns menu and favorites side by side */
+  flex-direction: row; 
   align-items: flex-start;
   margin: 20px auto;
   max-width: 1500px;
@@ -26,10 +26,10 @@ body {
   background-color: #585860;
   border-radius: 8px;
   padding: 20px;
-  flex-grow: 1; /* Allow favorites container to take remaining space */
+  flex-grow: 1; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: #fff;
-  z-index: 100; /* Ensures container is above other elements */
+  z-index: 100; 
 }
 
 .grid-produse {
@@ -113,6 +113,7 @@ body {
   background-color: var(--button-background);
   align-self: flex-start;
   color: white;
+  width:250px !important;
   padding: 10px 20px;
   margin-top: 20px;
   border: none;
@@ -159,11 +160,11 @@ body {
 }
 
 .menu {
-  width: 500px !important; /* Full width menu */
+  width: 500px !important; 
   background-color: var(--black);
   color: var(--white);
   padding: 20px;
-  height: 100vh; /* Full height for the menu */
+  height: 100vh; 
   overflow-y: auto;
 
   ol {
@@ -188,6 +189,6 @@ body {
   }
 
   .active {
-    background-color: #007bff; /* Highlight active link */
+    background-color: #007bff; 
   }
 }

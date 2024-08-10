@@ -4,12 +4,10 @@ import "./home.css";
 import Navbar from "../../components/navbar/Navbar";
 import Button from "../../components/button/Button";
 import { useAuth } from "../login/AuthContext";
-import { useNotification } from "../../components/notifications/NotificationContext";
 import DisplayProducts from "../DisplayProduct/DisplayProduct";
 import FilterComponent from "../../components/filter/FilterComponent";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import { useProducts } from "../../components/hooks/useProducts";
-import TopBar from "../../components/TopBar/TopBar";
 
 const Home = () => {
   const { products, setProducts } = useProducts();
@@ -42,6 +40,15 @@ const Home = () => {
 
   return (
     <div className="home">
+      <div className="hero-section">
+        <div className="hero-content">
+          <h1 className="hero-title">TEHNOLOGIA LA ÎNDEMÂNĂ</h1>
+          <p className="hero-subtitle">Găsește cele mai noi gadgeturi și echipamente tech, toate într-un singur loc!</p>
+          <Button className="hero-button" onClick={() => navigate("/products")}>
+            Vezi Produsele
+          </Button>
+        </div>
+      </div>
       <div className="content-container">
         <div className="navigation-container">
           <Navbar />

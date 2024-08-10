@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import Button from "../../components/button/Button";
-import TopBar from "../../components/TopBar/TopBar"; // Import TopBar
 import { useAuth } from "./AuthContext";
 import { useNotification } from "../../components/notifications/NotificationContext";
-import "./login.css";  // Ensure this points to your CSS file
+import "./login.css";  
 
 const Login = () => {
   const { setAuth } = useAuth();
@@ -72,7 +71,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="login-page">
       <div className="login-container">
         <div className="card">
           <div className="card-body">

@@ -92,12 +92,10 @@ body {
   color: black;
 }
 
-/* Ensuring the dropdown menu is on top */
 .nav-item .dropdown-menu {
   z-index: 9999;
 }
 
-/* Responsive adjustments */
 @media (max-width: 991px) {
   .navbar {
     background-color: transparent;
