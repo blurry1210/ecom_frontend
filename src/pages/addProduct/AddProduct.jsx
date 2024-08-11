@@ -128,7 +128,7 @@ function AddProduct() {
       );
       alert("Product added successfully!");
       console.log(response.data);
-      navigate("/profile");
+      navigate("/products");
     } catch (error) {
       console.error("Failed to add product:", error.response?.data);
       alert(`Failed to add product: ${error.response?.data.message}`);

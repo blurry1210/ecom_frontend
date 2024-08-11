@@ -15,7 +15,7 @@ const AdminLogin = () => {
     const adminPassword = "borza";
 
     if (password === adminPassword) {
-      localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDZiMDViNzFjZjEzYmI4YzdmNWJjMyIsImlhdCI6MTcyMzIzMDY4NywiZXhwIjoxNzIzMjM0Mjg3fQ.3i33BQwxWraLMUZDKUsMrcA4c0e2m5cP6AppJyf_xFA');
+      localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2NDZiMDViNzFjZjEzYmI4YzdmNWJjMyIsImlhdCI6MTcyMzQwNzkxMSwiZXhwIjoxNzIzNDExNTExfQ.w_aZwltFACN9YGJCK-DoIW7igyKR79ZZS4EIvX6UehE');
       navigate("/admin/dashboard");
     } else {
       setError("Incorrect password");

@@ -87,7 +87,7 @@ function DisplayProducts({ products, setProducts }) {
             <p className="price">${product.price}</p>
             <div className="buttons">
               <button 
-                onClick={() => handleAddToCart(product)}
+                onClick={product.quantity > 0 ? () => handleAddToCart(product) : null}
                 disabled={product.quantity === 0} 
                 style={{
                   backgroundColor: product.quantity === 0 ? '#ccc' : '#007bff', 

@@ -8,12 +8,14 @@ const DistributorOrders = ({ userId }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ORDERS_PER_PAGE = 10;
 
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3002/api/orders/distributor/${auth.user.id}`, // Correct endpoint for fetching distributor orders
+          `http://localhost:3002/api/orders/distributor/${auth.user.id}`,
           {
             headers: { Authorization: `Bearer ${auth.token}` },
           }
@@ -57,18 +59,33 @@ const DistributorOrders = ({ userId }) => {
     }
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const paginatedOrders = orders.slice(
+    (currentPage - 1) * ORDERS_PER_PAGE,
+    currentPage * ORDERS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(orders.length / ORDERS_PER_PAGE);
+
   if (loading) return <div className="loading">Loading...</div>;
   if (error) return <div className="error">{error}</div>;
 
   return (
     <div className="distributor-orders-container">
       <h2 className="order-text">Orders for Your Products</h2>
-      {orders.length === 0 ? (
+      {paginatedOrders.length === 0 ? (
         <p className="no-orders">No orders found</p>
       ) : (
-        orders.map((order) => (
+        paginatedOrders.map((order) => (
           <div key={order._id} className="order-card">
-            <p>Order ID: {order._id}</p>
+            <p><strong>Order ID:</strong> {order._id}</p>
+            <p><strong>Buyer:</strong> {order.address.firstName} {order.address.lastName}</p>
+            <p><strong>Email:</strong> {order.address.email}</p>
+            <p><strong>Phone:</strong> {order.address.phoneNumber}</p>
+            <p><strong>Shipping Address:</strong> {order.address.addressLine}, {order.address.city}, {order.address.postalCode}, {order.address.country}</p>
             {order.items.map((item) => (
               <div key={item._id} className="order-item">
                 <p className="order-item-label">Product:</p>
@@ -90,6 +107,19 @@ const DistributorOrders = ({ userId }) => {
             ))}
           </div>
         ))
+      )}
+      {totalPages > 1 && (
+        <div className="pagination">
+          {[...Array(totalPages).keys()].map((_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => handlePageChange(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );

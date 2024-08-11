@@ -9,27 +9,24 @@ const SearchBar = ({ setProducts }) => {
     const handleSearch = async (e) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
-
-        try {
-            let response;
-            if (newQuery.trim() === '') {
-                
-                response = await axios.get('http://localhost:5000/api/products');
-            } else {
-                
-                response = await axios.get('http://localhost:5000/api/products/search', {
-                    params: { query: newQuery },
-                });
-            }
-
-            setProducts(response.data);
-            setError(null); 
-        } catch (err) {
-            console.error('Error fetching products:', err);
-            setError('Failed to fetch products. Please try again later.');
-            setProducts([]);
+      
+        if (newQuery.trim() === '') {
+          setProducts([]); // or fetch all products
+          return;
         }
-    };
+      
+        try {
+          const response = await axios.get('http://localhost:3001/api/products/search', {
+            params: { query: newQuery },
+          });
+          setProducts(response.data);
+          setError(null);
+        } catch (err) {
+          console.error('Error fetching products:', err);
+          setError('Failed to fetch products. Please try again later.');
+          setProducts([]);
+        }
+      };
 
     return (
         <div className="search-bar-container">

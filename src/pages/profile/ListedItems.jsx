@@ -53,27 +53,33 @@ const ListedItems = () => {
 
   return (
     <div className="listed-items-container">
-      <div className="products-container">
-        {items.map((item) => (
-          <div key={item._id} className="product-card">
-            <Link to={`/edit-item/${item._id}`}>
-              <img
-                src={`http://localhost:3001/${item.images[0]}`}
-                alt={item.name}
-              />
-              <h2>{item.name}</h2>
-            </Link>
-            <p>${item.price}</p>
-            <p>Quantity: {item.quantity}</p>
-            <div className="item-controls">
+      {items.length === 0 ? (
+        <div className="empty-items-container">
+          <h2>Add your first item</h2>
+          <Link to="/add-product">
+            <button className="add-product-button">Add Product</button>
+          </Link>
+        </div>
+      ) : (
+        <div className="products-container">
+          {items.map((item) => (
+            <div key={item._id} className="product-card">
               <Link to={`/edit-item/${item._id}`}>
-                <button>Edit</button>
+                <img
+                  src={`http://localhost:3001/${item.images[0]}`}
+                  alt={item.name}
+                />
+                <h2>{item.name}</h2>
               </Link>
-              <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
+              <p>${item.price}</p>
+              <p>Quantity: {item.quantity}</p>
+              <div className="item-controls">
+                <button onClick={() => handleDeleteItem(item._id)}>Delete</button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

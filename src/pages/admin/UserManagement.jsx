@@ -6,11 +6,13 @@ import Button from "../../components/button/Button";
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(40);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const token = localStorage.getItem('token');
+        const token = localStorage.getItem("token");
         const response = await axios.get("http://localhost:3000/api/auth/all", {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -20,48 +22,55 @@ const UserManagement = () => {
         setError("Failed to fetch users");
       }
     };
-    
 
     fetchUsers();
   }, []);
 
+  // Get current users for the page
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   const handleRoleChange = async (userId, newRole) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await axios.put(
         `http://localhost:3000/api/auth/${userId}`,
         { role: newRole },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
-      console.log('Role update response:', response.data);
-  
-      setUsers(users.map((user) =>
-        user._id === userId ? { ...user, role: response.data.user.role } : user
-      ));
+
+      console.log("Role update response:", response.data);
+
+      setUsers(
+        users.map((user) =>
+          user._id === userId ? { ...user, role: response.data.user.role } : user
+        )
+      );
     } catch (error) {
       console.error("Failed to update user role:", error.response ? error.response.data : error.message);
       setError("Failed to update user role");
     }
   };
-  
+
   const handleDelete = async (userId) => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await axios.delete(
         `http://localhost:3000/api/auth/${userId}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
-      console.log('Delete response:', response.data);
-  
+
+      console.log("Delete response:", response.data);
+
       setUsers(users.filter((user) => user._id !== userId));
     } catch (error) {
       console.error("Failed to delete user:", error.response ? error.response.data : error.message);
       setError("Failed to delete user");
     }
   };
-  
 
   return (
     <div className="admin-layout">
@@ -79,7 +88,7 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {currentUsers.map((user) => (
               <tr key={user._id}>
                 <td>
                   {user.firstName} {user.lastName}
@@ -115,6 +124,17 @@ const UserManagement = () => {
         <div>
           <br />
           <Button className="butonsave">Save</Button>
+        </div>
+        <div className="pagination">
+          {Array.from({ length: Math.ceil(users.length / usersPerPage) }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
         </div>
       </main>
     </div>
